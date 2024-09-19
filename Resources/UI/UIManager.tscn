@@ -1,0 +1,54 @@
+[gd_scene load_steps=2 format=3 uid="uid://dys618q25njse"]
+
+[ext_resource type="Script" path="res://Scripts/TinyFramework/UI/UIManager.cs" id="1_wbn11"]
+
+[node name="UIManager" type="Node" node_paths=PackedStringArray("_bottom", "_middle", "_top", "_tips")]
+script = ExtResource("1_wbn11")
+_bottom = NodePath("Bottom")
+_middle = NodePath("Middle")
+_top = NodePath("Top")
+_tips = NodePath("Label")
+
+[node name="Bottom" type="Control" parent="."]
+z_index = 10
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Middle" type="Control" parent="."]
+z_index = 20
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Top" type="Control" parent="."]
+z_index = 30
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -11.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.933495, 0.96208, 0.439479, 1)
+text = "这是一条Tips"
+horizontal_alignment = 1
+vertical_alignment = 1

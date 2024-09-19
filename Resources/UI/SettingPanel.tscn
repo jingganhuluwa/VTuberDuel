@@ -1,0 +1,84 @@
+[gd_scene load_steps=3 format=3 uid="uid://cxhkmt4m4le4s"]
+
+[ext_resource type="Script" path="res://Scripts/Game/UI/SettingPanel.cs" id="1_mo1q2"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_psxt0"]
+bg_color = Color(0.481377, 0.652216, 0.485826, 1)
+
+[node name="SettingPanel" type="Panel" node_paths=PackedStringArray("BGMSlider", "AudioSlider", "BGMCheckButton", "AudioCheckButton", "SaveButton")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_psxt0")
+script = ExtResource("1_mo1q2")
+BGMSlider = NodePath("VBoxContainer/HBoxContainer/BGMSlider")
+AudioSlider = NodePath("VBoxContainer/HBoxContainer2/AudioSlider")
+BGMCheckButton = NodePath("VBoxContainer/HBoxContainer/BGMCheckButton")
+AudioCheckButton = NodePath("VBoxContainer/HBoxContainer2/AudioCheckButton")
+SaveButton = NodePath("SaveButton")
+
+[node name="SaveButton" type="Button" parent="."]
+layout_mode = 2
+offset_left = 294.0
+offset_top = 1600.0
+offset_right = 786.0
+offset_bottom = 1656.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "保存退出"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "音量设置"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "BGM"
+
+[node name="BGMSlider" type="HSlider" parent="VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(300, 80)
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="BGMCheckButton" type="CheckButton" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/align_to_largest_stylebox = 500
+flat = true
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "Audio"
+
+[node name="AudioSlider" type="HSlider" parent="VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(300, 80)
+layout_mode = 2
+size_flags_horizontal = 6
+
+[node name="AudioCheckButton" type="CheckButton" parent="VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+theme_override_constants/align_to_largest_stylebox = 500
+flat = true
