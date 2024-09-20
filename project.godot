@@ -34,6 +34,10 @@ window/handheld/orientation=1
 
 project/assembly_name="VTuberDuel"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/ExcelGenerate/plugin.cfg")
+
 [gui]
 
 theme/custom="res://Resources/Theme/MyTheme.tres"

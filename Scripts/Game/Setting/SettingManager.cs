@@ -8,7 +8,7 @@ using TinyFramework;
 
 public class SettingManager : Singleton<SettingManager>
 {
-    public static SettingData SettingData { get; private set; } = new SettingData();
+    public  SettingData SettingData { get; private set; } = new SettingData();
 
     public override void Init()
     {
@@ -17,9 +17,19 @@ public class SettingManager : Singleton<SettingManager>
 
         AudioManager.Instance.SetBGMVolume(SettingData.BGMVolume);
         AudioManager.Instance.SetAudioVolume(SettingData.AudioVolume);
+        
+        if (SettingData.IsBGMMute)
+        {
+            AudioManager.Instance.SetBGMVolume(0);
+        }
+
+        if (SettingData.IsAudioMute)
+        {
+            AudioManager.Instance.SetAudioVolume(0);
+        }
     }
 
-    public static void Save()
+    public  void Save()
     {
         GD.Print("设定保存");
         SaveAndLoadManager.Instance.Save(SettingData);

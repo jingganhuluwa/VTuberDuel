@@ -20,6 +20,8 @@ public partial class StartPanel:Panel
         StartButton.Pressed += StartButtonClick;
         SettingButton.Pressed += SettingButtonClick;
         ExitButton.Pressed += ExitButtonClick;
+        
+        AudioManager.Instance.PlayBGM("healing01.mp3");
     }
 
     private void ExitButtonClick()

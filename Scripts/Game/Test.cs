@@ -4,6 +4,7 @@
 // 日期：2024/09/19 17:28
 
 
+using System.Collections.Generic;
 using Godot;
 using TinyFramework;
 
@@ -48,9 +49,9 @@ public partial class Test:Node
 
         if (Input.IsKeyPressed(Key.Y))
         {
-            SettingManager.SettingData.BGMVolume = 50;
-            SettingManager.SettingData.AudioVolume = 60;
-            SettingManager.Save();
+            SettingManager.Instance.SettingData.BGMVolume = 50;
+            SettingManager.Instance.SettingData.AudioVolume = 60;
+            SettingManager.Instance.Save();
             _count = 0;
         }if (Input.IsKeyPressed(Key.U))
         {
@@ -60,6 +61,24 @@ public partial class Test:Node
             UIManager.Instance.AddTips("你好");
             _count = 0;
         }
+        if (Input.IsKeyPressed(Key.A))
+        {
+            VTuberConfig config = ConfigManager.Instance.GetOne<VTuberConfig>(1001);
+            GD.Print(config.Name);
+            _count = 0;
+        }
+        if (Input.IsKeyPressed(Key.S))
+        {
+            List<VTuberConfig> all = ConfigManager.Instance.GetAll<VTuberConfig>();
+            foreach (VTuberConfig config in all)
+            {
+                GD.Print($"名字:{config.Name} id:{config.Id} 技能:{config.SkillIds.ToString()}");
+            }
+
+            _count = 0;
+        }
+        
+        
         
         
         

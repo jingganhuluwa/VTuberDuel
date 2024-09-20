@@ -9,4 +9,6 @@ public class SettingData:IData
 {
     public int BGMVolume = 100;
     public int AudioVolume = 100;
+    public bool IsBGMMute = false;
+    public bool IsAudioMute = false;
 }
