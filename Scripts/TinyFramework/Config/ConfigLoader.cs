@@ -1,4 +1,4 @@
-// 文件：ConfigManager.cs
+// 文件：ConfigLoader.cs
 // 作者：急冻雪柜
 // 描述：配置管理器
 // 日期：2024/09/20 17:27
@@ -9,11 +9,11 @@ using Newtonsoft.Json;
 
 namespace TinyFramework;
 
-public class ConfigManager : Singleton<ConfigManager>
+public static class ConfigLoader
 {
-    private Dictionary<string, object> _configDict = new Dictionary<string, object>();
+    private static readonly Dictionary<string, object> _configDict = new Dictionary<string, object>();
 
-    public T GetOne<T>(int id) where T : BaseConfig
+    public static T GetOne<T>(int id) where T : BaseConfig
     {
         List<T> all = GetAll<T>();
         T config = all.Find(x => x.Id == id);
@@ -21,7 +21,7 @@ public class ConfigManager : Singleton<ConfigManager>
     }
 
 
-    public List<T> GetAll<T>() where T : BaseConfig
+    public static List<T> GetAll<T>() where T : BaseConfig
     {
         if (!_configDict.TryGetValue(typeof(T).Name, out object configs))
         {

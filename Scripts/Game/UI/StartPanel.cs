@@ -3,6 +3,7 @@
 // 描述：
 // 日期：2024/09/19 20:48
 
+using System.Collections.Generic;
 using Godot;
 using TinyFramework;
 
@@ -31,12 +32,41 @@ public partial class StartPanel:Panel
 
     private void SettingButtonClick()
     {
-        UIManager.Instance.ShowPanel<SettingPanel>();
+        UIManager.Instance.ShowUI<SettingPanel>();
     }
 
     private void StartButtonClick()
     {
+        var playerVTuberDatas = new List<VTuberData>();
+        int idCount=0;
+        for (int i = 0; i < 5; i++)
+        {
+            VTuberData data = new VTuberData
+            {
+                Id = idCount++,
+                ConfigId = 1001+i,
+                Speed = GD.RandRange(40,100)
+            };
+            playerVTuberDatas.Add(data);
+        }
         
+        var enemyVTuberDatas = new List<VTuberData>();
+        for (int i = 0; i < 5; i++)
+        {
+            VTuberData data = new VTuberData
+            {
+                Id = idCount++,
+                ConfigId = 1001+i,
+                Speed = GD.RandRange(40,100)
+            };
+            enemyVTuberDatas.Add(data);
+        }
+
+
+        BattleWorldManager.Instance.CreateBattleWorld("5v5", playerVTuberDatas, enemyVTuberDatas);
+        
+        
+        Hide();
     }
 
     public override void _ExitTree()

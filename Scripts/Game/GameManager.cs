@@ -8,6 +8,8 @@ using TinyFramework;
 
 public partial class GameManager:SingletonNode<GameManager>
 {
+
+    public Node Game;
     public override void _Ready()
     {
         AudioManager.Instance.Init();
@@ -15,14 +17,24 @@ public partial class GameManager:SingletonNode<GameManager>
         SaveAndLoadManager.Instance.Init();
         
         SettingManager.Instance.Init();
+        
+        LogicFrameManager.Instance.Init();
 
 
         PackedScene UI = ResourceLoader.Load<PackedScene>(PathDefine.UIPath+"UIManager.tscn");
         AddChild(UI.Instantiate<UIManager>());
         UIManager.Instance.Init();
         
-        UIManager.Instance.ShowPanel<StartPanel>();
+        UIManager.Instance.ShowUI<StartPanel>();
         //测试
         AddChild(new Test());
+
+        Game = GetNode("/root/Game");
+    }
+
+    public override void _Process(double delta)
+    {
+        LogicFrameManager.Instance.OnUpdate(delta);
+        
     }
 }

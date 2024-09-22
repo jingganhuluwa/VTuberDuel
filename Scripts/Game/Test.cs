@@ -63,13 +63,13 @@ public partial class Test:Node
         }
         if (Input.IsKeyPressed(Key.A))
         {
-            VTuberConfig config = ConfigManager.Instance.GetOne<VTuberConfig>(1001);
+            VTuberConfig config = ConfigLoader.GetOne<VTuberConfig>(1001);
             GD.Print(config.Name);
             _count = 0;
         }
         if (Input.IsKeyPressed(Key.S))
         {
-            List<VTuberConfig> all = ConfigManager.Instance.GetAll<VTuberConfig>();
+            List<VTuberConfig> all = ConfigLoader.GetAll<VTuberConfig>();
             foreach (VTuberConfig config in all)
             {
                 GD.Print($"名字:{config.Name} id:{config.Id} 技能:{config.SkillIds.ToString()}");
@@ -77,6 +77,16 @@ public partial class Test:Node
 
             _count = 0;
         }
+        
+        
+        if (Input.IsKeyPressed(Key.D))
+        {
+            Engine.TimeScale += 1;
+
+            _count = 0;
+        }
+        // GD.Print($"时间增量:{delta}");
+        // GD.Print($"逻辑帧增量:{LogicFrameManager.DeltaTime}");
         
         
         

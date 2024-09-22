@@ -28,7 +28,7 @@ public partial class UIManager:SingletonNode<UIManager>
     private Label _tips;
 
 
-    private Dictionary<string, Panel> _panelDict = new Dictionary<string, Panel>();
+    private Dictionary<string, Control> _panelDict = new Dictionary<string, Control>();
     private Queue<string> _tipsQueue = new Queue<string>();
     private bool isTipShow = false;
 
@@ -48,34 +48,38 @@ public partial class UIManager:SingletonNode<UIManager>
         }
     }
 
-    public void ShowPanel<T>(UILayer uiLayer=UILayer.Bottom,Action callback=null) where T : Panel
+    public void ShowUI<T>(UILayer uiLayer=UILayer.Bottom,Action callback=null) where T : Control
     {
         string panelName = typeof(T).Name;
-        if (_panelDict.TryGetValue(panelName,out Panel panel))
+        if (_panelDict.TryGetValue(panelName,out Control ui))
         {
-            panel?.Show();
+            ui?.Show();
             callback?.Invoke();
             return;
         }
         
         PackedScene packedScene = ResourceLoader.Load<PackedScene>(PathDefine.UIPath + panelName+".tscn");
-        panel = packedScene.Instantiate<Panel>();
-        panel.Name = panelName;
+        if (packedScene is null)
+        {
+            return;
+        }
+        ui = packedScene.Instantiate<Control>();
+        ui.Name = panelName;
         switch (uiLayer)
         {
             case UILayer.Bottom:
-                _bottom.AddChild(panel);
+                _bottom.AddChild(ui);
                 break;
             case UILayer.Middle:
-                _middle.AddChild(panel);
+                _middle.AddChild(ui);
                 break;
             case UILayer.Top:
-                _top.AddChild(panel);
+                _top.AddChild(ui);
                 break;
         }
-        panel.Show();
+        ui.Show();
         callback?.Invoke();
-        _panelDict.Add(panelName,panel);
+        _panelDict.Add(panelName,ui);
     }
     
     public void AddTips(string content)
