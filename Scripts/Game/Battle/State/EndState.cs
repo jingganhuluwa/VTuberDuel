@@ -3,21 +3,22 @@
 // 描述：
 // 日期：2024/09/08 19:09
 
-public class EndState:IState
+using Godot;
+
+public class EndState:BaseState
 {
-    
-    public void OnEnter(BattleWorld battleWorld)
+    public override void OnEnter()
     {
-        
-    }
+        base.OnEnter();
 
-    public void OnFrameUpdate(BattleWorld battleWorld)
-    {
-        
-    }
-
-    public void OnExit(BattleWorld battleWorld)
-    {
+        if (World.WinTeam==TeamEnum.Player)
+        {
+            GD.Print("游戏结束,玩家胜利");
+        }
+        else
+        {
+            GD.Print("游戏结束,敌方胜利");
+        }
         
     }
 }

@@ -44,8 +44,10 @@ public partial class StartPanel:Panel
             VTuberData data = new VTuberData
             {
                 Id = idCount++,
-                ConfigId = 1001+i,
-                Speed = GD.RandRange(40,100)
+                ConfigId = 1001 + i,
+                Speed = GD.RandRange(40, 100),
+                HP = GD.RandRange(400, 1000),
+                Atk = GD.RandRange(50, 100)
             };
             playerVTuberDatas.Add(data);
         }
@@ -57,7 +59,9 @@ public partial class StartPanel:Panel
             {
                 Id = idCount++,
                 ConfigId = 1001+i,
-                Speed = GD.RandRange(40,100)
+                Speed = GD.RandRange(40,100),
+                HP = GD.RandRange(400, 1000),
+                Atk = GD.RandRange(50, 100)
             };
             enemyVTuberDatas.Add(data);
         }

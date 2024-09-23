@@ -6,26 +6,19 @@
 using System.Collections.Generic;
 using System.Linq;
 
-public class ActState:IState
+public class ActState:BaseState
 {
     
-    public void OnEnter(BattleWorld battleWorld)
+    public override void OnEnter()
     {
-        List<VTuberLogic> allVTuber = battleWorld.GetAllVTuber();
-        VTuberLogic vTuberLogic = allVTuber.MaxBy(x=>x.ActCount-x.ActCountMax);
+        base.OnEnter();
+        List<VTuberLogic> allVTuber = World.GetAllVTuber();
+        VTuberLogic vTuberLogic = allVTuber.MaxBy(x=>x.RunCount-x.RunCountMax);
         //行动条清空,直接等0也行,看设计需求
-        vTuberLogic.ActCount -= vTuberLogic.ActCountMax;
-        vTuberLogic.Act();
-        battleWorld.ChangeState(battleWorld.RunState);
-    }
-
-    public void OnFrameUpdate(BattleWorld battleWorld)
-    {
+        vTuberLogic.RunCount -= vTuberLogic.RunCountMax;
         
+        vTuberLogic.Act(World,()=>ChangeState(World.RunState));
     }
-
-    public void OnExit(BattleWorld battleWorld)
-    {
-        
-    }
+    
+    
 }

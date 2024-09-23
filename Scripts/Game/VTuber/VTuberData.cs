@@ -8,5 +8,8 @@ public class VTuberData
 {
     public int Id;
     public int ConfigId;
+    
     public int Speed;
+    public int HP;
+    public int Atk;
 }

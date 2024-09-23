@@ -5,30 +5,34 @@
 
 using System.Collections.Generic;
 using System.Linq;
-using Godot;
 
-public class RunState:IState
+public class RunState:BaseState
 {
-   
-    public void OnEnter(BattleWorld battleWorld)
+    public override void OnEnter()
     {
-        GD.Print("RunState");
+        base.OnEnter();
+        //判定双方英雄存活数是否为0
+        World.AliveCount();
     }
 
-    public void OnFrameUpdate(BattleWorld battleWorld)
+    public override void OnFrameUpdate()
     {
         
         //遍历所有VTuber,累加行动条
-        List<VTuberLogic> allVTuber = battleWorld.GetAllVTuber();
+        List<VTuberLogic> allVTuber = World.GetAllVTuber();
         foreach (VTuberLogic vTuberLogic in allVTuber)
         {
-            vTuberLogic.ActCount += vTuberLogic.Speed;
+            if (vTuberLogic.isAlive)
+            {
+                vTuberLogic.RunCount += vTuberLogic.Speed;
+            }
+            
         }
 
         //当前行动条-行动条最大值>0,转为行动状态
-        if (allVTuber.Max(x => x.ActCount - x.ActCountMax)>0)
+        if (allVTuber.Max(x => x.RunCount - x.RunCountMax)>0)
         {
-            battleWorld.ChangeState(battleWorld.ActState);
+            ChangeState(World.ActState);
         }
         //以上代码和一下代码作用一样
         // foreach (VTuberLogic vTuberLogic in allVTuber)
@@ -39,9 +43,5 @@ public class RunState:IState
         //     }
         // }
     }
-
-    public void OnExit(BattleWorld battleWorld)
-    {
-        
-    }
+    
 }

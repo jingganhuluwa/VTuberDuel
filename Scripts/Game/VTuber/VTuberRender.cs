@@ -6,7 +6,35 @@
 
 using Godot;
 
-public class VTuberRender
+public partial class VTuberRender : Node3D
 {
-    public Sprite3D Image;
+    [Export] public ProgressBar HPBar;
+    [Export] public ProgressBar RunBar;
+    [Export] public Sprite3D VTuberSprite;
+    [Export] public Label VTuberName;
+
+    public VTuberLogic OwnerLogic;
+
+
+    
+
+    public override void _Process(double delta)
+    {
+        if (OwnerLogic is null)
+        {
+            return;
+        }
+        UpdateHP();
+        UpdateRunBar();
+    }
+
+    public void UpdateHP()
+    {
+        HPBar.Value = (OwnerLogic.Hp / OwnerLogic.MaxHp).RawFloat*100;
+    }
+    
+    public void UpdateRunBar()
+    {
+        RunBar.Value = (OwnerLogic.RunCount / OwnerLogic.RunCountMax).RawFloat*100;
+    }
 }

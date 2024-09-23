@@ -3,24 +3,14 @@
 // 描述：
 // 日期：2024/09/03 01:09
 
-using Godot;
-
-public class StartState : IState
+public class StartState : BaseState
 {
 
-    public void OnEnter(BattleWorld battleWorld)
+    public override void OnEnter()
     {
         //todo 遍历所有VTuber,触发开局技能
-        
-        GD.Print("StartState");
-        battleWorld.ChangeState(battleWorld.RunState);
+        base.OnEnter();
+        World.ChangeState(World.RunState);
     }
-
-    public void OnFrameUpdate(BattleWorld battleWorld)
-    {
-    }
-
-    public void OnExit(BattleWorld battleWorld)
-    {
-    }
+    
 }

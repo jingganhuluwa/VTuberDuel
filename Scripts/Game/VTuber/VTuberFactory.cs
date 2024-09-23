@@ -14,22 +14,26 @@ public class VTuberFactory
     /// </summary>
     public static VTuberLogic CreateBattleVTuber(VTuberData vTuberData, int seat,Node3D parent)
     {
-        var sprite3D = new Sprite3D();
-        sprite3D.Texture=  ResourceLoader.Load<Texture2D>("res://icon.svg");
-        parent.AddChild(sprite3D);
+
+        PackedScene vTuberView = ResourceLoader.Load<PackedScene>(PathDefine.PrefabsPath + "VTuberRender.tscn");
+        VTuberRender vTuberRender = vTuberView.Instantiate<VTuberRender>();
+        parent.AddChild(vTuberRender);
         
-        var vTuberRender = new VTuberRender()
-        {
-            Image = sprite3D
-        };
+        
 
         var vTuberLogic = new VTuberLogic
         {
             Speed = vTuberData.Speed,
+            Hp = vTuberData.HP,
+            MaxHp = vTuberData.HP,
+            Atk = vTuberData.Atk,
+            Team = TeamEnum.Player,
             Seat = seat,
             Config = ConfigLoader.GetOne<VTuberConfig>(vTuberData.ConfigId),
             Render = vTuberRender
         };
+        vTuberRender.OwnerLogic = vTuberLogic;
+        vTuberRender.VTuberName.Text = vTuberLogic.Config.Name;
         return vTuberLogic;
     }
 }

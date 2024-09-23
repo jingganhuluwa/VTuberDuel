@@ -19,18 +19,30 @@ public class BattleWorld
     private readonly List<VTuberLogic> _allVTuberList = new List<VTuberLogic>();
     private readonly List<VTuberLogic> _playerVTuberList = new List<VTuberLogic>();
     private readonly List<VTuberLogic> _enemyVTuberList = new List<VTuberLogic>();
+
+    private int _playerAliveCount;
+    private int _enemyAliveCount;
+
+    public TeamEnum WinTeam=TeamEnum.Player;
     
-    private IState _currentState;
-    public readonly IState StartState=new StartState();
-    public readonly IState RunState=new RunState();
-    public readonly IState ActState=new ActState();
-    public readonly IState PauseState=new PauseState();
-    public readonly IState EndState=new EndState();
+    private BaseState _currentState;
+    public  BaseState StartState { get; private set; }
+    public  BaseState RunState{ get; private set; }
+    public  BaseState ActState{ get; private set; }
+    public  BaseState PauseState{ get; private set; }
+    public  BaseState EndState{ get; private set; }
     
+
     public BattleWorld Create(string battleWorldName, List<VTuberData> playerVTuberList, List<VTuberData> enemyVTuberList)
     {
         Name = battleWorldName;
 
+        RunState = new RunState(){World =this };
+        ActState = new ActState(){World =this };
+        PauseState = new PauseState(){World =this };
+        EndState = new EndState(){World =this };
+        StartState = new StartState(){World =this };
+        
         //加载战斗场景
         PackedScene scene = ResourceLoader.Load<PackedScene>(PathDefine.ScenePath + "BattleScene.tscn");
         Scene=scene.Instantiate<BattleScene>();
@@ -61,14 +73,14 @@ public class BattleWorld
 
     public void LogicFrameUpdate()
     {
-        _currentState?.OnFrameUpdate(this);
+        _currentState?.OnFrameUpdate();
     }
     
-    public void ChangeState(IState state)
+    public void ChangeState(BaseState state)
     {
-        _currentState?.OnExit(this);
+        _currentState?.OnExit();
         _currentState = state;
-        _currentState?.OnEnter(this);
+        _currentState?.OnEnter();
     }
 
     public void OnDestroyWorld()
@@ -80,5 +92,47 @@ public class BattleWorld
     {
         //toList,临时List,防手贱,在其他地方进行add,remove操作
         return _allVTuberList.ToList();
+    }
+
+    public List<VTuberLogic> GetEnemyList(TeamEnum team)
+    {
+        if (team==TeamEnum.Player)
+        {
+            return _enemyVTuberList.ToList();
+        }
+
+        return _playerVTuberList.ToList();
+    }
+
+    public void AliveCount()
+    {
+        _playerAliveCount=0;
+        _enemyAliveCount=0;
+       foreach (VTuberLogic playerVTuber in _playerVTuberList)
+       {
+           if (playerVTuber.isAlive)
+           {
+               _playerAliveCount++;
+           }
+       }
+       
+       foreach (VTuberLogic enemyVTuber in _enemyVTuberList)
+       {
+           if (enemyVTuber.isAlive)
+           {
+               _enemyAliveCount++;
+           }
+       }
+
+       
+
+        if (_playerAliveCount==0  || _enemyAliveCount==0)
+        {
+            if (_playerAliveCount==0)
+            {
+                WinTeam = TeamEnum.Enemy;
+            }
+            ChangeState(EndState);
+        }
     }
 }
