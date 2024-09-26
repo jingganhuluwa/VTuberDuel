@@ -33,6 +33,7 @@ public class VTuberFactory
             Render = vTuberRender
         };
         vTuberRender.OwnerLogic = vTuberLogic;
+        vTuberRender.UpdateHP(1);
         vTuberRender.VTuberName.Text = vTuberLogic.Config.Name;
         return vTuberLogic;
     }

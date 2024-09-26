@@ -41,7 +41,7 @@ enabled=PackedStringArray("res://addons/ExcelGenerate/plugin.cfg")
 [gui]
 
 theme/custom="res://Resources/Theme/MyTheme.tres"
-theme/custom_font="res://Resources/Fonts/AlimamaDongFangDaKai-Regular.otf"
+theme/custom_font="res://Resources/Fonts/LXGWWenKaiGB-Bold.ttf"
 
 [rendering]
 

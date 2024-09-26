@@ -1,7 +1,9 @@
 [gd_scene load_steps=9 format=3 uid="uid://boi8j2ylacjcl"]
 
-[ext_resource type="Script" path="res://Scripts/Game/VTuber/VTuberRender.cs" id="1_bncko"]
+[ext_resource type="Script" path="res://Scripts/Game/VTuber/Render/VTuberRender.cs" id="1_3xn2n"]
 [ext_resource type="Texture2D" uid="uid://b0ib7cpyyjtb1" path="res://icon.svg" id="2_dg2e3"]
+[ext_resource type="PackedScene" uid="uid://blsgbw0qouvuy" path="res://Resources/Prefabs/HPBar.tscn" id="2_juvca"]
+[ext_resource type="FontFile" uid="uid://wg8scoq2pe37" path="res://Resources/Fonts/LXGWWenKaiGB-Bold.ttf" id="3_f6jbv"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3782c"]
 border_width_left = 1
@@ -12,17 +14,6 @@ corner_radius_top_left = 3
 corner_radius_top_right = 3
 corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kqel6"]
-bg_color = Color(0.887093, 0.0598728, 0.378027, 1)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-corner_radius_top_left = 2
-corner_radius_top_right = 2
-corner_radius_bottom_right = 2
-corner_radius_bottom_left = 2
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8y61v"]
 bg_color = Color(0, 100, 100, 1)
@@ -41,15 +32,12 @@ viewport_path = NodePath("SubViewport")
 [sub_resource type="ViewportTexture" id="ViewportTexture_fdbeu"]
 viewport_path = NodePath("SubViewport2")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_qv74x"]
-viewport_path = NodePath("SubViewport3")
-
 [node name="VTuberRender" type="Node3D" node_paths=PackedStringArray("HPBar", "RunBar", "VTuberSprite", "VTuberName")]
-script = ExtResource("1_bncko")
+script = ExtResource("1_3xn2n")
 HPBar = NodePath("SubViewport/HPBar")
 RunBar = NodePath("SubViewport2/RunBar")
 VTuberSprite = NodePath("VtuberImage")
-VTuberName = NodePath("SubViewport3/VTuberName")
+VTuberName = NodePath("VTuberName")
 
 [node name="SubViewport" type="SubViewport" parent="."]
 transparent_bg = true
@@ -57,13 +45,7 @@ handle_input_locally = false
 size = Vector2i(200, 30)
 render_target_update_mode = 4
 
-[node name="HPBar" type="ProgressBar" parent="SubViewport"]
-offset_right = 200.0
-offset_bottom = 22.0
-theme_override_styles/background = SubResource("StyleBoxFlat_3782c")
-theme_override_styles/fill = SubResource("StyleBoxFlat_kqel6")
-value = 50.0
-show_percentage = false
+[node name="HPBar" parent="SubViewport" instance=ExtResource("2_juvca")]
 
 [node name="SubViewport2" type="SubViewport" parent="."]
 transparent_bg = true
@@ -84,23 +66,6 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_8y61v")
 value = 50.0
 show_percentage = false
 
-[node name="SubViewport3" type="SubViewport" parent="."]
-transparent_bg = true
-handle_input_locally = false
-size = Vector2i(200, 40)
-render_target_update_mode = 4
-
-[node name="VTuberName" type="Label" parent="SubViewport3"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 30
-text = "DJWCB"
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="VtuberImage" type="Sprite3D" parent="."]
 texture = ExtResource("2_dg2e3")
 
@@ -112,6 +77,9 @@ texture = SubResource("ViewportTexture_03ble")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.78, 0)
 texture = SubResource("ViewportTexture_fdbeu")
 
-[node name="Sprite3D3" type="Sprite3D" parent="."]
+[node name="VTuberName" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.8, 0)
-texture = SubResource("ViewportTexture_qv74x")
+text = "名字五个字"
+font = ExtResource("3_f6jbv")
+font_size = 64
+outline_size = 8

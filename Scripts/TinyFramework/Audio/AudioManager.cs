@@ -86,7 +86,7 @@ public partial class AudioManager : SingletonNode<AudioManager>
     {
         if (audioStream != null)
         {
-            if (_audioIndex>_maxAudioPlayerNum)
+            if (_audioIndex>=_maxAudioPlayerNum)
             {
                 _audioIndex = 0;
             }

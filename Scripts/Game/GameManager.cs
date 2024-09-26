@@ -35,6 +35,5 @@ public partial class GameManager:SingletonNode<GameManager>
     public override void _Process(double delta)
     {
         LogicFrameManager.Instance.OnUpdate(delta);
-        
     }
 }

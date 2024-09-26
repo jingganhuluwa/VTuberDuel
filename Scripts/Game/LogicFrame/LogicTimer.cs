@@ -32,6 +32,7 @@ public class LogicTimer
     public void OnLogicFrameUpdate()
     {
         _accTime += (VInt) LogicFrameConfig.LogicFrameIntervalMS;
+        
         if (_accTime>=DelayTime&&LoopCount<Loop)
         {
             OnTimerComplete?.Invoke();
