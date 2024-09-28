@@ -2,8 +2,8 @@ using Godot;
 
 public partial class BattleScene : Node
 {
-	[Export] public Node3D[] PlayerSeatArr; 
-	[Export] public Node3D[] EnemySeatArr; 
+	[Export] public Node2D[] PlayerSeatArr; 
+	[Export] public Node2D[] EnemySeatArr; 
 	
 	
 	// Called when the node enters the scene tree for the first time.

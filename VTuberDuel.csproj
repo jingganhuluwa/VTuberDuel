@@ -10,4 +10,7 @@
     <PackageReference Include="ICSharpCode.SharpZipLib.dll" Version="0.85.4.369" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\Scene\" />
+  </ItemGroup>
 </Project>

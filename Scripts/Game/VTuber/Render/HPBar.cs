@@ -23,6 +23,8 @@ public partial class HPBar:Control
             //治疗
             _healing.Scale = hpScale;
             _onHit.Scale = hpScale;
+            _healing.ZIndex = 2;
+            _onHit.ZIndex = 1;
             tween.TweenProperty(_hp, "scale",hpScale,0.6);
             
         }
@@ -31,6 +33,8 @@ public partial class HPBar:Control
             //受击
             _hp.Scale =hpScale ;
             _healing.Scale = hpScale;
+            _healing.ZIndex = 1;
+            _onHit.ZIndex = 2;
             tween.TweenProperty(_onHit, "scale",hpScale,0.6);
         }
         tween.Play();

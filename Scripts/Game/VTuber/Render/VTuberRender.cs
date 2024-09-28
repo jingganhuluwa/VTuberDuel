@@ -8,13 +8,14 @@ using System;
 using Godot;
 using TinyFramework;
 
-public partial class VTuberRender : Node3D
+public partial class VTuberRender : Node2D
 {
     //[Export] public ProgressBar HPBar;
     [Export] public HPBar HPBar;
     [Export] public ProgressBar RunBar;
-    [Export] public Sprite3D VTuberSprite;
-    [Export] public Label3D VTuberName;
+    [Export] public Sprite2D VTuberSprite;
+    [Export] public Label VTuberName;
+    [Export] public AnimatedSprite2D AnimSlash;
 
     public VTuberLogic OwnerLogic;
 
@@ -53,7 +54,7 @@ public partial class VTuberRender : Node3D
         //RunBar.Value = (OwnerLogic.RunCount / OwnerLogic.RunCountMax).RawFloat*100;
     }
 
-    public void MoveTo(Vector3 targetPos, float time, Action callback)
+    public void MoveTo(Vector2 targetPos, float time, Action callback)
     {
         Tween tween = CreateTween();
         tween.TweenProperty(this, "global_position", targetPos, time);

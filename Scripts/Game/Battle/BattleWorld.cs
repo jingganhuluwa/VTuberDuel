@@ -53,16 +53,14 @@ public class BattleWorld
 
         for (int i = 0; i < playerVTuberList.Count; i++)
         {
-            VTuberLogic vTuber = VTuberFactory.CreateBattleVTuber(playerVTuberList[i], i + 1, Scene.PlayerSeatArr[i]);
-            vTuber.Team = TeamEnum.Player;
+            VTuberLogic vTuber = VTuberFactory.CreateBattleVTuber(playerVTuberList[i], i + 1, Scene.PlayerSeatArr[i],TeamEnum.Player);
             _playerVTuberList.Add(vTuber);
             _allVTuberList.Add(vTuber);
         }
 
         for (int i = 0; i < enemyVTuberList.Count; i++)
         {
-            VTuberLogic vTuber = VTuberFactory.CreateBattleVTuber(enemyVTuberList[i], i + 1, Scene.EnemySeatArr[i]);
-            vTuber.Team = TeamEnum.Enemy;
+            VTuberLogic vTuber = VTuberFactory.CreateBattleVTuber(enemyVTuberList[i], i + 1, Scene.EnemySeatArr[i],TeamEnum.Enemy);
             _enemyVTuberList.Add(vTuber);
             _allVTuberList.Add(vTuber);
         }

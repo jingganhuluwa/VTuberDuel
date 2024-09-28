@@ -6,23 +6,23 @@
 
 using Godot;
 
-public partial class FlyDamage:Node3D
+public partial class FlyDamage:Node2D
 {
-    [Export] private Label3D _label3D;
+    [Export] private Label _label;
 
     public void Show(int damage)
     {
-        _label3D.Text = damage.ToString();
-        _label3D.Modulate=Colors.White;
+        _label.Text = damage.ToString();
+        _label.Modulate=Colors.White;
         if (damage<0)
         {
             //治疗
-            _label3D.Modulate=Colors.Green;
+            _label.Modulate=Colors.Green;
         }
 
-        var position = new Vector3(0,0.8f,0);
+        var position = new Vector2(0,-100);
         Tween tween = CreateTween();
-        tween.TweenProperty(_label3D, "position",position,0.8);
+        tween.TweenProperty(_label, "position",position,0.8);
         tween.TweenCallback(Callable.From(() =>
         {
             //todo 暂时销毁,后面可能用对象池循环利用

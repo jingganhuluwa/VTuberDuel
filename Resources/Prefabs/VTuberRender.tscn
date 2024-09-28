@@ -1,9 +1,14 @@
-[gd_scene load_steps=9 format=3 uid="uid://boi8j2ylacjcl"]
+[gd_scene load_steps=13 format=3 uid="uid://boi8j2ylacjcl"]
 
 [ext_resource type="Script" path="res://Scripts/Game/VTuber/Render/VTuberRender.cs" id="1_3xn2n"]
 [ext_resource type="Texture2D" uid="uid://b0ib7cpyyjtb1" path="res://icon.svg" id="2_dg2e3"]
 [ext_resource type="PackedScene" uid="uid://blsgbw0qouvuy" path="res://Resources/Prefabs/HPBar.tscn" id="2_juvca"]
-[ext_resource type="FontFile" uid="uid://wg8scoq2pe37" path="res://Resources/Fonts/LXGWWenKaiGB-Bold.ttf" id="3_f6jbv"]
+[ext_resource type="Texture2D" uid="uid://ck3i7ey0lxgiw" path="res://Resources/Image/White Slash Thin/File1.png" id="5_wyuvi"]
+[ext_resource type="Texture2D" uid="uid://ckwy0a7jr2ckv" path="res://Resources/Image/White Slash Thin/File2.png" id="6_bnkii"]
+[ext_resource type="Texture2D" uid="uid://dicwhkiby3ywx" path="res://Resources/Image/White Slash Thin/File3.png" id="7_n88s3"]
+[ext_resource type="Texture2D" uid="uid://b8oxdfxeyk8sp" path="res://Resources/Image/White Slash Thin/File4.png" id="8_4tb0i"]
+[ext_resource type="Texture2D" uid="uid://32jliam73b4y" path="res://Resources/Image/White Slash Thin/File5.png" id="9_uaokg"]
+[ext_resource type="Texture2D" uid="uid://8gqd50qflx4w" path="res://Resources/Image/White Slash Thin/File6.png" id="10_1whbl"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3782c"]
 border_width_left = 1
@@ -26,60 +31,85 @@ corner_radius_top_right = 2
 corner_radius_bottom_right = 2
 corner_radius_bottom_left = 2
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_03ble"]
-viewport_path = NodePath("SubViewport")
+[sub_resource type="SpriteFrames" id="SpriteFrames_jh1i4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_wyuvi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_bnkii")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_n88s3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_4tb0i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_uaokg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_1whbl")
+}],
+"loop": true,
+"name": &"Slash",
+"speed": 10.0
+}]
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_fdbeu"]
-viewport_path = NodePath("SubViewport2")
-
-[node name="VTuberRender" type="Node3D" node_paths=PackedStringArray("HPBar", "RunBar", "VTuberSprite", "VTuberName")]
+[node name="VTuberRender" type="Node2D" node_paths=PackedStringArray("HPBar", "RunBar", "VTuberSprite", "VTuberName", "AnimSlash")]
+scale = Vector2(1.5, 1.5)
 script = ExtResource("1_3xn2n")
-HPBar = NodePath("SubViewport/HPBar")
-RunBar = NodePath("SubViewport2/RunBar")
+HPBar = NodePath("HPBar")
+RunBar = NodePath("RunBar")
 VTuberSprite = NodePath("VtuberImage")
 VTuberName = NodePath("VTuberName")
+AnimSlash = NodePath("Slash")
 
-[node name="SubViewport" type="SubViewport" parent="."]
-transparent_bg = true
-handle_input_locally = false
-size = Vector2i(200, 30)
-render_target_update_mode = 4
-
-[node name="HPBar" parent="SubViewport" instance=ExtResource("2_juvca")]
-
-[node name="SubViewport2" type="SubViewport" parent="."]
-transparent_bg = true
-handle_input_locally = false
-size = Vector2i(200, 30)
-render_target_update_mode = 4
-
-[node name="RunBar" type="ProgressBar" parent="SubViewport2"]
+[node name="HPBar" parent="." instance=ExtResource("2_juvca")]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -100.0
+offset_top = -100.0
+offset_right = -100.0
+offset_bottom = -100.0
+grow_horizontal = 2
+
+[node name="RunBar" type="ProgressBar" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -100.0
+offset_top = -80.0
 offset_right = 100.0
-offset_bottom = 10.0
+offset_bottom = -70.0
 grow_horizontal = 2
 theme_override_styles/background = SubResource("StyleBoxFlat_3782c")
 theme_override_styles/fill = SubResource("StyleBoxFlat_8y61v")
 value = 50.0
 show_percentage = false
 
-[node name="VtuberImage" type="Sprite3D" parent="."]
+[node name="VtuberImage" type="Sprite2D" parent="."]
 texture = ExtResource("2_dg2e3")
 
-[node name="Sprite3D2" type="Sprite3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-texture = SubResource("ViewportTexture_03ble")
-
-[node name="Sprite3D" type="Sprite3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.78, 0)
-texture = SubResource("ViewportTexture_fdbeu")
-
-[node name="VTuberName" type="Label3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.8, 0)
+[node name="VTuberName" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -137.5
+offset_top = 100.0
+offset_right = 137.5
+offset_bottom = 167.0
+grow_horizontal = 2
 text = "名字五个字"
-font = ExtResource("3_f6jbv")
-font_size = 64
-outline_size = 8
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Slash" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -100)
+rotation = -1.5708
+scale = Vector2(0.5, 1)
+sprite_frames = SubResource("SpriteFrames_jh1i4")
+animation = &"Slash"
+frame_progress = 0.901657

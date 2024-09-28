@@ -1,46 +1,42 @@
 [gd_scene load_steps=2 format=3 uid="uid://wyv1f5dr7gid"]
 
-[ext_resource type="Script" path="res://Resources/Scene/BattleScene.cs" id="1_bqwl4"]
+[ext_resource type="Script" path="res://Scripts/Game/Battle/BattleScene.cs" id="1_wxys0"]
 
 [node name="BattleScene" type="Node" node_paths=PackedStringArray("PlayerSeatArr", "EnemySeatArr")]
-script = ExtResource("1_bqwl4")
+script = ExtResource("1_wxys0")
 PlayerSeatArr = [NodePath("PlayerSeat/1"), NodePath("PlayerSeat/2"), NodePath("PlayerSeat/3"), NodePath("PlayerSeat/4"), NodePath("PlayerSeat/5")]
 EnemySeatArr = [NodePath("EnemySeat/1"), NodePath("EnemySeat/2"), NodePath("EnemySeat/3"), NodePath("EnemySeat/4"), NodePath("EnemySeat/5")]
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.996195, -0.0871557, 0, 0.0871557, 0.996195, 0, 0, 10)
+[node name="EnemySeat" type="Node2D" parent="."]
+position = Vector2(540, 900)
 
-[node name="EnemySeat" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+[node name="1" type="Node2D" parent="EnemySeat"]
 
-[node name="1" type="Node3D" parent="EnemySeat"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
+[node name="2" type="Node2D" parent="EnemySeat"]
+position = Vector2(-300, -150)
 
-[node name="2" type="Node3D" parent="EnemySeat"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, -1.5, 0)
+[node name="3" type="Node2D" parent="EnemySeat"]
+position = Vector2(300, -150)
 
-[node name="3" type="Node3D" parent="EnemySeat"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, -1.5, 0)
+[node name="4" type="Node2D" parent="EnemySeat"]
+position = Vector2(-200, -400)
 
-[node name="4" type="Node3D" parent="EnemySeat"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)
+[node name="5" type="Node2D" parent="EnemySeat"]
+position = Vector2(200, -400)
 
-[node name="5" type="Node3D" parent="EnemySeat"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+[node name="PlayerSeat" type="Node2D" parent="."]
+position = Vector2(540, 1500)
 
-[node name="PlayerSeat" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+[node name="1" type="Node2D" parent="PlayerSeat"]
 
-[node name="1" type="Node3D" parent="PlayerSeat"]
+[node name="2" type="Node2D" parent="PlayerSeat"]
+position = Vector2(-300, 150)
 
-[node name="2" type="Node3D" parent="PlayerSeat"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, -0.5, 0)
+[node name="3" type="Node2D" parent="PlayerSeat"]
+position = Vector2(300, 150)
 
-[node name="3" type="Node3D" parent="PlayerSeat"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, -0.5, 0)
+[node name="4" type="Node2D" parent="PlayerSeat"]
+position = Vector2(-200, 400)
 
-[node name="4" type="Node3D" parent="PlayerSeat"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -2, 0)
-
-[node name="5" type="Node3D" parent="PlayerSeat"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -2, 0)
+[node name="5" type="Node2D" parent="PlayerSeat"]
+position = Vector2(200, 400)

@@ -74,12 +74,20 @@ public class VTuberLogic
             target.isAlive = false;
             target.RunCount = 0;
         }
+        Render.AnimSlash.Show();
+        Render.AnimSlash.Modulate = new Color(GD.Randf(),GD.Randf(),GD.Randf());
+        Render.AnimSlash.Play("Slash");
+        LogicTimerManager.Instance.DelayCall(500, () =>
+        {
+            Render.AnimSlash.Stop();
+            Render.AnimSlash.Hide();
+        });
         AudioManager.Instance.PlayAudio("battle01.mp3",true);
-        MoveTo(Render.GetParent<Node3D>().GlobalPosition, time);
+        MoveTo(Render.GetParent<Node2D>().GlobalPosition, time);
         LogicTimerManager.Instance.DelayCall(new VInt(time * 1000), callback);
     }
 
-    public void MoveTo(Vector3 targetPos, float time, Action callback = null)
+    public void MoveTo(Vector2 targetPos, float time, Action callback = null)
     {
         Render.MoveTo(targetPos, time, callback);
     }
@@ -88,6 +96,15 @@ public class VTuberLogic
     public void OnHit(VInt damage)
     {
         Hp -= damage;
+        if (Hp<0)
+        {
+            Hp = 0;
+        }
+
+        if (Hp>MaxHp)
+        {
+            Hp = MaxHp;
+        }
         Render.UpdateHP((Hp / MaxHp).RawFloat, damage.RawInt);
     }
 }

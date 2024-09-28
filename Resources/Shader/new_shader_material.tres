@@ -1,0 +1,7 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://bvjc6uow0udyb"]
+
+[ext_resource type="Shader" uid="uid://d0w70xvlgmefk" path="res://Resources/Shader/VTuberRender.tres" id="1_g3tft"]
+
+[resource]
+resource_local_to_scene = true
+shader = ExtResource("1_g3tft")
