@@ -35,6 +35,7 @@ public class VTuberLogic
     public VTuberConfig Config;
 
     public VTuberRender Render;
+    public VInt2 LogicPosition;
 
 
     public void Run()
@@ -55,8 +56,8 @@ public class VTuberLogic
             if (target.isAlive)
             {
                 //造成伤害
-                MoveTo(target.Render.GlobalPosition, 0.8f,  ()=>{
-                    ATK(target, 0.6f,callback);
+                MoveTo(target.Render, 1000,  ()=>{
+                    ATK(target, 1000,callback);
                 });
                 break;
             }
@@ -66,7 +67,7 @@ public class VTuberLogic
     }
 
 
-    public void ATK(VTuberLogic target, float time, Action callback = null)
+    public void ATK(VTuberLogic target, VInt time, Action callback = null)
     {
         target.OnHit(Atk);
         if (target.Hp <= 0)
@@ -83,13 +84,14 @@ public class VTuberLogic
             Render.AnimSlash.Hide();
         });
         AudioManager.Instance.PlayAudio("battle01.mp3",true);
-        MoveTo(Render.GetParent<Node2D>().GlobalPosition, time);
-        LogicTimerManager.Instance.DelayCall(new VInt(time * 1000), callback);
+        MoveTo(Render.GetParent<Node2D>(), time);
+        LogicTimerManager.Instance.DelayCall(time, callback);
     }
 
-    public void MoveTo(Vector2 targetPos, float time, Action callback = null)
+    public void MoveTo(Node2D target, VInt time, Action callback = null)
     {
-        Render.MoveTo(targetPos, time, callback);
+        var moveToAction = new MoveToAction(this, target, time, callback);
+        ActionManager.Instance.RunAction(moveToAction);
     }
 
 
@@ -107,4 +109,6 @@ public class VTuberLogic
         }
         Render.UpdateHP((Hp / MaxHp).RawFloat, damage.RawInt);
     }
+    
+    
 }

@@ -33,5 +33,6 @@ public class LogicFrameManager:Singleton<LogicFrameManager>
     {
         BattleWorldManager.Instance.LogicFrameUpdate();
         LogicTimerManager.Instance.OnLogicFrameUpdate();
+        ActionManager.Instance.OnLogicFrameUpdate();
     }
 }

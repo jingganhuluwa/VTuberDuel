@@ -43,10 +43,8 @@ public class VTuberFactory
         {
             vTuberRender.AnimSlash.Modulate=Colors.Aqua;
         }
-        vTuberRender.AnimSlash.Hide();
-        vTuberRender.OwnerLogic = vTuberLogic;
-        vTuberRender.UpdateHP(1);
-        vTuberRender.VTuberName.Text = vTuberLogic.Config.Name;
+        vTuberRender.Init(vTuberLogic);
+
         return vTuberLogic;
     }
 }
