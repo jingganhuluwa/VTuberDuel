@@ -75,9 +75,9 @@ public class VTuberLogic
             target.RunCount = 0;
         }
         Render.AnimSlash.Show();
-        Render.AnimSlash.Modulate = new Color(GD.Randf(),GD.Randf(),GD.Randf());
+        Render.AnimSlash.Modulate = new Color(GD.Randf(),GD.Randf(),GD.Randf())*2.5f;
         Render.AnimSlash.Play("Slash");
-        LogicTimerManager.Instance.DelayCall(500, () =>
+        LogicTimerManager.Instance.DelayCall(800, () =>
         {
             Render.AnimSlash.Stop();
             Render.AnimSlash.Hide();

@@ -1,3 +1,10 @@
-[gd_scene format=3 uid="uid://jflob462dmk1"]
+[gd_scene load_steps=2 format=3 uid="uid://jflob462dmk1"]
+
+[sub_resource type="Environment" id="Environment_b26cj"]
+background_mode = 3
+glow_enabled = true
 
 [node name="Game" type="Node"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_b26cj")

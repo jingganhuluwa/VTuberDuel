@@ -4,12 +4,14 @@
 
 [node name="UIManager" type="Node" node_paths=PackedStringArray("_bottom", "_middle", "_top", "_tips")]
 script = ExtResource("1_wbn11")
-_bottom = NodePath("Bottom")
-_middle = NodePath("Middle")
-_top = NodePath("Top")
-_tips = NodePath("Label")
+_bottom = NodePath("CanvasLayer/Bottom")
+_middle = NodePath("CanvasLayer/Middle")
+_top = NodePath("CanvasLayer/Top")
+_tips = NodePath("CanvasLayer/Label")
 
-[node name="Bottom" type="Control" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Bottom" type="Control" parent="CanvasLayer"]
 z_index = 10
 layout_mode = 3
 anchors_preset = 15
@@ -19,7 +21,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="Middle" type="Control" parent="."]
+[node name="Middle" type="Control" parent="CanvasLayer"]
 z_index = 20
 layout_mode = 3
 anchors_preset = 15
@@ -29,7 +31,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="Top" type="Control" parent="."]
+[node name="Top" type="Control" parent="CanvasLayer"]
 z_index = 30
 layout_mode = 3
 anchors_preset = 15
@@ -39,13 +41,13 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="Label" type="Label" parent="."]
+[node name="Label" type="Label" parent="CanvasLayer"]
 anchors_preset = 14
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_top = -11.5
-offset_bottom = 11.5
+offset_top = -33.5
+offset_bottom = 33.5
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(0.933495, 0.96208, 0.439479, 1)

@@ -38,6 +38,10 @@ project/assembly_name="VTuberDuel"
 
 enabled=PackedStringArray("res://addons/ExcelGenerate/plugin.cfg")
 
+[godot_resource_groups]
+
+auto_rebuild=true
+
 [gui]
 
 theme/custom="res://Resources/Theme/MyTheme.tres"
@@ -72,3 +76,5 @@ image={}
 [rendering]
 
 renderer/rendering_method="mobile"
+textures/vram_compression/import_etc2_astc=true
+viewport/hdr_2d=true

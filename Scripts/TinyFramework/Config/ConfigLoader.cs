@@ -4,7 +4,7 @@
 // 日期：2024/09/20 17:27
 
 using System.Collections.Generic;
-using System.IO;
+using Godot;
 using Newtonsoft.Json;
 
 namespace TinyFramework;
@@ -26,9 +26,13 @@ public static class ConfigLoader
         if (!_configDict.TryGetValue(typeof(T).Name, out object configs))
         {
             string fullName = PathDefine.ConfigPath + typeof(T).Name + ".json";
-            using (StreamReader sr = new StreamReader(fullName))
+            if (!FileAccess.FileExists(fullName))
             {
-                configs = JsonConvert.DeserializeObject<List<T>>(sr.ReadToEnd());
+                return null;
+            }
+            using (FileAccess fileAccess = FileAccess.Open(fullName,FileAccess.ModeFlags.Read))
+            {
+                configs = JsonConvert.DeserializeObject<List<T>>(fileAccess.GetAsText());
                 _configDict.Add(typeof(T).Name, configs);
             }
         }

@@ -42,9 +42,9 @@ public partial class ExcelGenerate : EditorPlugin
 
 	private void GenerateJsonFile()
 	{
-		if (!Directory.Exists(PathDefine.ConfigPath))
+		if (!Directory.Exists(PathDefine.GenerateConfigPath))
 		{
-			Directory.CreateDirectory(PathDefine.ConfigPath);
+			Directory.CreateDirectory(PathDefine.GenerateConfigPath);
 		}
 		
 		foreach ((string name, DataTable table) in _dataTableDict)
@@ -92,7 +92,7 @@ public partial class ExcelGenerate : EditorPlugin
 			string json = JsonConvert.SerializeObject(dataTable, Formatting.Indented);
 			json = json.Replace("\"[", "[").Replace("]\"", "]");
 
-			using (StreamWriter writer = new StreamWriter(PathDefine.ConfigPath + table.TableName + ".json"))
+			using (StreamWriter writer = new StreamWriter(PathDefine.GenerateConfigPath + table.TableName + ".json"))
 			{
 				writer.WriteLine(json);
 			}
