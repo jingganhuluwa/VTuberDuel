@@ -4,6 +4,7 @@
 // 日期：2024/09/22 18:12
 
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Godot;
@@ -32,9 +33,14 @@ public class BattleWorld
     public BaseState PauseState { get; private set; }
     public BaseState EndState { get; private set; }
 
+    public SRandom SRandom { get; private set; }
+    
+    public readonly Queue<Action> ActQueue = new Queue<Action>();
+    public bool IsSkillFinish = true;
+
 
     public BattleWorld Create(string battleWorldName, List<VTuberData> playerVTuberList,
-        List<VTuberData> enemyVTuberList)
+        List<VTuberData> enemyVTuberList,uint seed)
     {
         Name = battleWorldName;
 
@@ -53,14 +59,14 @@ public class BattleWorld
 
         for (int i = 0; i < playerVTuberList.Count; i++)
         {
-            VTuberLogic vTuber = VTuberFactory.CreateBattleVTuber(playerVTuberList[i], i + 1, Scene.PlayerSeatArr[i],TeamEnum.Player);
+            VTuberLogic vTuber = VTuberFactory.CreateBattleVTuber(playerVTuberList[i], i + 1, Scene.PlayerSeatArr[i],TeamEnum.Player,this);
             _playerVTuberList.Add(vTuber);
             _allVTuberList.Add(vTuber);
         }
 
         for (int i = 0; i < enemyVTuberList.Count; i++)
         {
-            VTuberLogic vTuber = VTuberFactory.CreateBattleVTuber(enemyVTuberList[i], i + 1, Scene.EnemySeatArr[i],TeamEnum.Enemy);
+            VTuberLogic vTuber = VTuberFactory.CreateBattleVTuber(enemyVTuberList[i], i + 1, Scene.EnemySeatArr[i],TeamEnum.Enemy,this);
             _enemyVTuberList.Add(vTuber);
             _allVTuberList.Add(vTuber);
         }
@@ -68,6 +74,7 @@ public class BattleWorld
         //改变当前状态为开局转态
         ChangeState(StartState);
 
+        SRandom=new SRandom(seed);
         return this;
     }
 
@@ -76,6 +83,7 @@ public class BattleWorld
     {
         _currentState?.OnFrameUpdate();
     }
+    
 
     public void ChangeState(BaseState state)
     {
@@ -90,7 +98,7 @@ public class BattleWorld
 
     //toList,临时List,防手贱,在其他地方进行add,remove操作
     /// <returns>所有VTuber逻辑</returns>
-    public List<VTuberLogic> AllVTuber() => _allVTuberList.ToList();
+    public List<VTuberLogic> AllVTuber => _allVTuberList.ToList();
 
     /// <returns>所有敌方队伍VTuber逻辑</returns>
     public List<VTuberLogic> AllEnemyTeamList(TeamEnum team) =>
@@ -106,7 +114,7 @@ public class BattleWorld
         _enemyAliveCount = 0;
         foreach (VTuberLogic playerVTuber in _playerVTuberList)
         {
-            if (playerVTuber.isAlive)
+            if (playerVTuber.IsAlive)
             {
                 _playerAliveCount++;
             }
@@ -114,7 +122,7 @@ public class BattleWorld
 
         foreach (VTuberLogic enemyVTuber in _enemyVTuberList)
         {
-            if (enemyVTuber.isAlive)
+            if (enemyVTuber.IsAlive)
             {
                 _enemyAliveCount++;
             }

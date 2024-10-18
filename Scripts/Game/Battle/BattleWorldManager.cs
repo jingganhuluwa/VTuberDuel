@@ -19,7 +19,7 @@ public class BattleWorldManager:Singleton<BattleWorldManager>
     {
         BattleWorld battleWorld = new BattleWorld();
 
-        BattleWorld world = battleWorld.Create(battleWorldName,playerVTuberList, enemyVTuberList);
+        BattleWorld world = battleWorld.Create(battleWorldName,playerVTuberList, enemyVTuberList,500);
         
         _battleWorldDict.Add(battleWorldName,world);
 

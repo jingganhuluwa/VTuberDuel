@@ -12,7 +12,7 @@ public class VTuberFactory
     /// <summary>
     /// 战斗场景创建VTuber
     /// </summary>
-    public static VTuberLogic CreateBattleVTuber(VTuberData vTuberData, int seat,Node2D parent,TeamEnum team)
+    public static VTuberLogic CreateBattleVTuber(VTuberData vTuberData, int seat,Node2D parent,TeamEnum team,BattleWorld battleWorld)
     {
 
         PackedScene vTuberView = ResourceLoader.Load<PackedScene>(PathDefine.PrefabsPath + "VTuberRender.tscn");
@@ -27,11 +27,19 @@ public class VTuberFactory
             Hp = vTuberData.HP,
             MaxHp = vTuberData.HP,
             Atk = vTuberData.Atk,
+            Amor = vTuberData.Amor,
             Team = team,
             Seat = seat,
             Config = ConfigLoader.GetOne<VTuberConfig>(vTuberData.ConfigId),
-            Render = vTuberRender
+            Render = vTuberRender,
+            OwnerBattleWorld = battleWorld
         };
+        foreach (int skillId in vTuberLogic.Config.SkillIds)
+        {
+            var skill = new Skill(skillId);
+            skill.Owner = vTuberLogic;
+            vTuberLogic.SkillList.Add(skill);
+        }
 
         if (team==TeamEnum.Enemy)
         {

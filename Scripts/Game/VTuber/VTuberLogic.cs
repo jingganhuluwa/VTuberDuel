@@ -6,7 +6,6 @@
 using System;
 using System.Collections.Generic;
 using Godot;
-using TinyFramework;
 
 public enum TeamEnum
 {
@@ -26,17 +25,28 @@ public class VTuberLogic
     public VInt MaxHp;
 
     public VInt Atk;
+    public VInt Amor;
 
-    public bool isAlive = true;
+    public bool IsAlive = true;
 
     public TeamEnum Team;
 
 
     public VTuberConfig Config;
 
+    public readonly List<Skill> SkillList=new List<Skill>();
+
+    /// <summary>
+    /// 所属战斗世界
+    /// </summary>
+    public BattleWorld OwnerBattleWorld;
+    
     public VTuberRender Render;
     public VInt2 LogicPosition;
 
+    
+    
+    
 
     public void Run()
     {
@@ -46,47 +56,57 @@ public class VTuberLogic
     }
 
 
+    
+    
+    
     //vtuber行动
     public void Act(BattleWorld battleWorld, Action callback)
     {
-        //执行普通攻击
-        List<VTuberLogic> vTuberList = battleWorld.AllEnemyTeamList(Team);
-        foreach (VTuberLogic target in vTuberList)
+        foreach (Skill skill in SkillList)
         {
-            if (target.isAlive)
-            {
-                //造成伤害
-                MoveTo(target.Render, 1000,  ()=>{
-                    ATK(target, 1000,callback);
-                });
-                break;
-            }
+            skill.TriggerSkill();
         }
+
+        
+        //执行普通攻击
+        // List<VTuberLogic> vTuberList = battleWorld.AllEnemyTeamList(Team);
+        // foreach (VTuberLogic target in vTuberList)
+        // {
+        //     if (target.isAlive)
+        //     {
+        //         Render.ZIndex = 5;
+        //         //造成伤害
+        //         MoveTo(target.Render, 1000,  ()=>{
+        //             ATK(target, 1000,callback);
+        //         });
+        //         break;
+        //     }
+        // }
 
         //LogicTimerManager.Instance.DelayCall(800, callback);
     }
 
 
-    public void ATK(VTuberLogic target, VInt time, Action callback = null)
-    {
-        target.OnHit(Atk);
-        if (target.Hp <= 0)
-        {
-            target.isAlive = false;
-            target.RunCount = 0;
-        }
-        Render.AnimSlash.Show();
-        Render.AnimSlash.Modulate = new Color(GD.Randf(),GD.Randf(),GD.Randf())*2.5f;
-        Render.AnimSlash.Play("Slash");
-        LogicTimerManager.Instance.DelayCall(800, () =>
-        {
-            Render.AnimSlash.Stop();
-            Render.AnimSlash.Hide();
-        });
-        AudioManager.Instance.PlayAudio("battle01.mp3",true);
-        MoveTo(Render.GetParent<Node2D>(), time);
-        LogicTimerManager.Instance.DelayCall(time, callback);
-    }
+    // public void ATK(VTuberLogic target, VInt time, Action callback = null)
+    // {
+    //     target.OnHit(Atk);
+    //     if (target.Hp <= 0)
+    //     {
+    //         target.isAlive = false;
+    //         target.RunCount = 0;
+    //     }
+    //     Render.AnimSlash.Show();
+    //     Render.AnimSlash.Modulate = new Color(GD.Randf(),GD.Randf(),GD.Randf())*2.5f;
+    //     Render.AnimSlash.Play("Slash");
+    //     LogicTimerManager.Instance.DelayCall(800, () =>
+    //     {
+    //         Render.AnimSlash.Stop();
+    //         Render.AnimSlash.Hide();
+    //     });
+    //     AudioManager.Instance.PlayAudio("battle01.mp3",true);
+    //     MoveTo(Render.GetParent<Node2D>(), time,callback);
+    //     //LogicTimerManager.Instance.DelayCall(time, callback);
+    // }
 
     public void MoveTo(Node2D target, VInt time, Action callback = null)
     {
@@ -101,6 +121,7 @@ public class VTuberLogic
         if (Hp<0)
         {
             Hp = 0;
+            IsAlive = false;
         }
 
         if (Hp>MaxHp)
@@ -108,6 +129,7 @@ public class VTuberLogic
             Hp = MaxHp;
         }
         Render.UpdateHP((Hp / MaxHp).RawFloat, damage.RawInt);
+        Render.Onhit();
     }
     
     

@@ -19,10 +19,10 @@ public class RunState:BaseState
     {
         
         //遍历所有VTuber,累加行动条
-        List<VTuberLogic> allVTuber = World.AllVTuber();
+        List<VTuberLogic> allVTuber = World.AllVTuber;
         foreach (VTuberLogic vTuberLogic in allVTuber)
         {
-            if (vTuberLogic.isAlive)
+            if (vTuberLogic.IsAlive)
             {
                 vTuberLogic.Run();
             }

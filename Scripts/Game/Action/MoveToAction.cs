@@ -24,7 +24,7 @@ public class MoveToAction:ActionBase
     /// <param name="targetPos">移动的目标位置</param>
     /// <param name="times">移动用时(毫秒级)</param>
     /// <param name="moveComplete">移动完成后的回调</param>
-    public MoveToAction(VTuberLogic moveObj,Node2D target, VInt times, Action onMoveComplete)
+    public MoveToAction(VTuberLogic moveObj,Node2D target, VInt times, Action onMoveComplete=null)
     {
         _moveObject = moveObj;
         _target = target;
@@ -51,8 +51,6 @@ public class MoveToAction:ActionBase
             //行动完成
             OnMoveComplete?.Invoke();
             ActionComplete = true;
-            GD.Print(_moveObject.LogicPosition.vec2.X);
-            GD.Print(_targetPos.vec2.X);
             return;
         }
 

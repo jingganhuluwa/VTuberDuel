@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://b7l5vu3k4y8tp"]
+
+[ext_resource type="Script" path="res://Scripts/Game/VTuber/Render/FlyDamage.cs" id="1_vv0yg"]
+
+[node name="FlyDamage" type="Node2D" node_paths=PackedStringArray("_label")]
+script = ExtResource("1_vv0yg")
+_label = NodePath("Label")
+
+[node name="Label" type="Label" parent="."]
+text = "500"

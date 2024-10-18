@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://chkd56qmidcg0"]
+
+[ext_resource type="Texture2D" uid="uid://ck3i7ey0lxgiw" path="res://Resources/Image/White Slash Thin/File1.png" id="1_embdy"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_76346"]
+size = Vector2(10, 10)
+
+[node name="Node2D" type="Node2D"]
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
+modulate = Color(1, 0, 1, 1)
+mesh = SubResource("QuadMesh_76346")
+texture = ExtResource("1_embdy")

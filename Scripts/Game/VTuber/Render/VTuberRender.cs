@@ -13,14 +13,16 @@ public partial class VTuberRender : Node2D
     [Export] public HPBar HPBar;
     [Export] public ProgressBar RunBar;
     [Export] public Sprite2D VTuberSprite;
+    [Export] public Sprite2D OnhitSprite;
+    [Export] public AnimationPlayer AniPlayer;
     [Export] public Label VTuberName;
+    [Export] public Label SkillName;
     [Export] public AnimatedSprite2D AnimSlash;
 
     public VTuberLogic OwnerLogic;
 
     public Node2D Parent { get; private set; }
-
-
+    
     
 
     public override void _Process(double delta)
@@ -36,6 +38,8 @@ public partial class VTuberRender : Node2D
     public void Init(VTuberLogic logic)
     {
         AnimSlash.Hide();
+        OnhitSprite.Hide();
+        SkillName.Hide();
         OwnerLogic = logic;
         UpdateHP(1);
         VTuberName.Text = logic.Config.Name;
@@ -56,6 +60,17 @@ public partial class VTuberRender : Node2D
         var flyDamage = packedScene.Instantiate<FlyDamage>();
         AddChild(flyDamage);
         flyDamage.Show(damage);
+    }
+    
+    public void UpdateSkillName(string skillName)
+    {
+        SkillName.Show();
+        SkillName.Text = skillName;
+        LogicTimerManager.Instance.DelayCall(1000, () =>
+        {
+            SkillName.Hide();
+        });
+      
     }
 
 
@@ -80,6 +95,12 @@ public partial class VTuberRender : Node2D
 
     private void UpdatePos(double delta)
     {
-        GlobalPosition = VInt2.Lerp(new VInt2(GlobalPosition), OwnerLogic.LogicPosition, (float) delta).vec2;
+        GlobalPosition = VInt2.Lerp(new VInt2(GlobalPosition), OwnerLogic.LogicPosition, (float) LogicFrameManager.DeltaTime/15).vec2;
+    }
+
+
+    public void Onhit()
+    {
+        AniPlayer.Play("Onhit");
     }
 }

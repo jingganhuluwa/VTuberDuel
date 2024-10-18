@@ -12,4 +12,5 @@ public class VTuberData
     public int Speed;
     public int HP;
     public int Atk;
+    public int Amor;
 }
