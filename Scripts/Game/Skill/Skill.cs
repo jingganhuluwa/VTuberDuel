@@ -21,7 +21,6 @@ public class Skill
 
     private readonly List<VInt> _damagesList = new List<VInt>();
 
-    
 
     public Skill(int skillId)
     {
@@ -57,12 +56,12 @@ public class Skill
         SetTarget();
         //todo 先计算扣除血量
         CalculateDamage();
-        
-        _battleWorld.ActQueue.Enqueue(() =>
+
+        Owner.ActQueue.Enqueue(() =>
         {
             Owner.Render.UpdateSkillName(Config.Name);
             SkillForward(SkillBack);
-        } );
+        });
     }
 
     /// <summary>
@@ -71,7 +70,8 @@ public class Skill
     /// <param name="callback"></param>
     private void SkillForward(Action callback)
     {
-        _battleWorld.IsSkillFinish = false;
+        Owner.IsSkillFinish = false;
+        Owner.Render.ZIndex = 5;
         switch (Config.SkillType)
         {
             case SkillType.MoveToTarget:
@@ -89,10 +89,9 @@ public class Skill
             case SkillType.Bullet:
                 break;
         }
-        
     }
 
-    
+
     /// <summary>
     /// 技能后摇
     /// </summary>
@@ -104,11 +103,47 @@ public class Skill
             target.OnHit(_damagesList[i]);
         }
 
-        MoveToAction moveToAction = new MoveToAction(Owner, Owner.Render.Parent, 500, ()=>{_battleWorld.IsSkillFinish = true;});
+        MoveToAction moveToAction =
+            new MoveToAction(Owner, Owner.Render.Parent, 500, () =>
+            {
+                Owner.IsSkillFinish = true;
+                Owner.Render.ZIndex = 0;
+                //检测当前行动人数,少于2时,切换为RunState
+                CheckAndSwitchState();
+            });
         ActionManager.Instance.RunAction(moveToAction);
-        Owner.Render.ZIndex = 0;
+        
+       
     }
 
+    /// <summary>
+    /// 检测当前行动人数,少于2时,切换为RunState
+    /// </summary>
+    private void CheckAndSwitchState()
+    {
+        int actNum = 0;
+        foreach (VTuberLogic vTuberLogic in _battleWorld.AllVTuber)
+        {
+            if (!vTuberLogic.IsAlive)
+            {
+                continue;
+            }
+
+            if (!vTuberLogic.IsSkillFinish)
+            {
+                actNum++;
+            }
+
+        }
+
+        if (actNum<2)
+        {
+
+            _battleWorld.ChangeState(_battleWorld.RunState);
+        }
+    }
+    
+    
     /// <summary>
     /// 计算伤害
     /// </summary>
@@ -154,7 +189,7 @@ public class Skill
             {
                 case SkillDamageType.Normal:
                 default:
-                    damage=calculateNum -target.Amor;
+                    damage = calculateNum - target.Amor;
                     break;
                 case SkillDamageType.Magic:
                     damage = calculateNum * Owner.Atk / (Owner.Atk + target.Amor);
@@ -163,7 +198,29 @@ public class Skill
                     damage = calculateNum;
                     break;
             }
+
             _damagesList.Add(damage);
+            Damage(target, damage);
+        }
+    }
+
+    /// <summary>
+    /// 立即造成伤害
+    /// </summary>
+    /// <param name="target"></param>
+    /// <param name="damage"></param>
+    private void Damage(VTuberLogic target, VInt damage)
+    {
+        target.Hp -= damage;
+        if (target.Hp < 0)
+        {
+            target.Hp = 0;
+            target.IsAlive = false;
+        }
+
+        if (target.Hp > target.MaxHp)
+        {
+            target.Hp = target.MaxHp;
         }
     }
 
@@ -203,6 +260,7 @@ public class Skill
                         break;
                     }
                 }
+
                 break;
             case SkillAtkType.All:
                 foreach (VTuberLogic vTuber in teamList)
@@ -222,6 +280,7 @@ public class Skill
                         Targets.Add(vTuber);
                     }
                 }
+
                 break;
             case SkillAtkType.FrontRow:
                 break;

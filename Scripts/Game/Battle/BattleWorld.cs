@@ -4,7 +4,6 @@
 // 日期：2024/09/22 18:12
 
 
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Godot;
@@ -35,8 +34,8 @@ public class BattleWorld
 
     public SRandom SRandom { get; private set; }
     
-    public readonly Queue<Action> ActQueue = new Queue<Action>();
-    public bool IsSkillFinish = true;
+    
+
 
 
     public BattleWorld Create(string battleWorldName, List<VTuberData> playerVTuberList,

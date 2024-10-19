@@ -26,16 +26,16 @@ public class ActState : BaseState
     public override void OnFrameUpdate()
     {
         base.OnFrameUpdate();
+        
 
-
-        if (World.IsSkillFinish && World.ActQueue.Count > 0)
+        foreach (VTuberLogic vTuberLogic in World.AllVTuber)
         {
-            World.ActQueue.Dequeue()?.Invoke();
+            if (vTuberLogic.IsAlive)
+            {
+                vTuberLogic.OnFrameUpdate();
+            }
         }
+        
 
-        if ( World.ActQueue.Count == 1)
-        {
-            World.ChangeState(World.RunState);
-        }
     }
 }

@@ -21,6 +21,9 @@ public partial class VTuberRender : Node2D
 
     public VTuberLogic OwnerLogic;
 
+    public VInt MaxHP;
+    public VInt HP;
+
     public Node2D Parent { get; private set; }
     
     
@@ -41,15 +44,18 @@ public partial class VTuberRender : Node2D
         OnhitSprite.Hide();
         SkillName.Hide();
         OwnerLogic = logic;
-        UpdateHP(1);
+        MaxHP = logic.MaxHp;
+        HP = logic.Hp;
+        UpdateHP();
         VTuberName.Text = logic.Config.Name;
         logic.LogicPosition = new VInt2(GlobalPosition) ;
         Parent = GetParent<Node2D>();
     }
     
-    public void UpdateHP(float rate,int damage=0)
+    public void UpdateHP(int damage=0)
     {
-        
+        HP -= damage;
+        float rate = (HP / MaxHP).RawFloat;
         HPBar.UpdateHP(rate);
         if (damage==0)
         {

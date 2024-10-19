@@ -43,6 +43,9 @@ public class VTuberLogic
     
     public VTuberRender Render;
     public VInt2 LogicPosition;
+    
+    public readonly Queue<Action> ActQueue = new Queue<Action>();
+    public bool IsSkillFinish = true;
 
     
     
@@ -117,20 +120,25 @@ public class VTuberLogic
 
     public void OnHit(VInt damage)
     {
-        Hp -= damage;
-        if (Hp<0)
-        {
-            Hp = 0;
-            IsAlive = false;
-        }
 
-        if (Hp>MaxHp)
-        {
-            Hp = MaxHp;
-        }
-        Render.UpdateHP((Hp / MaxHp).RawFloat, damage.RawInt);
+        Render.UpdateHP( damage.RawInt);
         Render.Onhit();
     }
-    
+
+    public void OnFrameUpdate()
+    {
+        if (ActQueue.Count==0)
+        {
+            return;
+        }
+
+        if (IsSkillFinish)
+        {
+            ActQueue.Dequeue()?.Invoke();
+        }
+        
+        
+        
+    }
     
 }
