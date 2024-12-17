@@ -1,0 +1,154 @@
+[gd_scene load_steps=37 format=3 uid="uid://c6l3i10iaj22t"]
+
+[ext_resource type="Texture2D" uid="uid://dyu3rngv2o25a" path="res://Resources/Image/书香蝶影·视频/书香蝶影·视频_00000.jpg" id="1_hcndk"]
+[ext_resource type="Texture2D" uid="uid://xq2eo11icbb4" path="res://Resources/Image/书香蝶影·视频/书香蝶影·视频_00001.jpg" id="2_ecv66"]
+[ext_resource type="Texture2D" uid="uid://c0ne4a064jh6n" path="res://Resources/Image/书香蝶影·视频/书香蝶影·视频_00002.jpg" id="3_kve41"]
+[ext_resource type="Texture2D" uid="uid://c8l4bub8srklw" path="res://Resources/Image/书香蝶影·视频/书香蝶影·视频_00003.jpg" id="4_wvmbk"]
+[ext_resource type="Texture2D" uid="uid://c7eq0cqpikidc" path="res://Resources/Image/书香蝶影·视频/书香蝶影·视频_00004.jpg" id="5_cecqa"]
+[ext_resource type="Texture2D" uid="uid://csoioytnsu08i" path="res://Resources/Image/书香蝶影·视频/书香蝶影·视频_00005.jpg" id="6_t2t47"]
+[ext_resource type="Texture2D" uid="uid://d1iolpvqte36p" path="res://Resources/Image/书香蝶影·视频/书香蝶影·视频_00006.jpg" id="7_uflgr"]
+[ext_resource type="Texture2D" uid="uid://okimjnqxumlg" path="res://Resources/Image/书香蝶影·视频/书香蝶影·视频_00007.jpg" id="8_36eoi"]
+[ext_resource type="Texture2D" uid="uid://bdf55i1fgm7pf" path="res://Resources/Image/书香蝶影·视频/书香蝶影·视频_00008.jpg" id="9_vmdhw"]
+[ext_resource type="Texture2D" uid="uid://cwujbpa0n0bir" path="res://Resources/Image/书香蝶影·视频/书香蝶影·视频_00009.jpg" id="10_cnyj5"]
+[ext_resource type="Texture2D" uid="uid://c2qcmbkt0ciam" path="res://Resources/Image/书香蝶影·视频/书香蝶影·视频_00010.jpg" id="11_xlc8m"]
+[ext_resource type="Texture2D" uid="uid://0clcpddhapa0" path="res://Resources/Image/书香蝶影·视频/书香蝶影·视频_00011.jpg" id="12_lob6k"]
+[ext_resource type="Texture2D" uid="uid://c3yiqiy8smy3t" path="res://Resources/Image/书香蝶影·视频/书香蝶影·视频_00012.jpg" id="13_ma2o5"]
+[ext_resource type="Texture2D" uid="uid://8v7kdxkjf1ql" path="res://Resources/Image/书香蝶影·视频/书香蝶影·视频_00013.jpg" id="14_b46cc"]
+[ext_resource type="Texture2D" uid="uid://cstvtnjyh1mnv" path="res://Resources/Image/书香蝶影·视频/书香蝶影·视频_00014.jpg" id="15_k5m00"]
+[ext_resource type="Texture2D" uid="uid://cforat23hghfl" path="res://Resources/Image/书香蝶影·视频/书香蝶影·视频_00015.jpg" id="16_6wng3"]
+[ext_resource type="Texture2D" uid="uid://bpa11gj1cpbfo" path="res://Resources/Image/书香蝶影·视频/书香蝶影·视频_00016.jpg" id="17_m6u7f"]
+[ext_resource type="Texture2D" uid="uid://bynipcufqfn2h" path="res://Resources/Image/书香蝶影·视频/书香蝶影·视频_00017.jpg" id="18_ecgou"]
+[ext_resource type="Texture2D" uid="uid://damhl8t236fg7" path="res://Resources/Image/书香蝶影·视频/书香蝶影·视频_00018.jpg" id="19_e8yit"]
+[ext_resource type="Texture2D" uid="uid://6esng786bfos" path="res://Resources/Image/书香蝶影·视频/书香蝶影·视频_00019.jpg" id="20_sl5fr"]
+[ext_resource type="Texture2D" uid="uid://daj376tk5imyy" path="res://Resources/Image/书香蝶影·视频/书香蝶影·视频_00020.jpg" id="21_gt361"]
+[ext_resource type="Texture2D" uid="uid://bjcqit8e5gifg" path="res://Resources/Image/书香蝶影·视频/书香蝶影·视频_00021.jpg" id="22_j3x36"]
+[ext_resource type="Texture2D" uid="uid://dhv206uxwrcf2" path="res://Resources/Image/书香蝶影·视频/书香蝶影·视频_00022.jpg" id="23_j2p7e"]
+[ext_resource type="Texture2D" uid="uid://bgxuncdys3vmm" path="res://Resources/Image/书香蝶影·视频/书香蝶影·视频_00023.jpg" id="24_8g1es"]
+[ext_resource type="Texture2D" uid="uid://d1j3kjo7sjdd" path="res://Resources/Image/书香蝶影·视频/书香蝶影·视频_00024.jpg" id="25_5fm5b"]
+[ext_resource type="Texture2D" uid="uid://dew1123kiefvp" path="res://Resources/Image/书香蝶影·视频/书香蝶影·视频_00025.jpg" id="26_8obwq"]
+[ext_resource type="Texture2D" uid="uid://p5e81031wvqk" path="res://Resources/Image/书香蝶影·视频/书香蝶影·视频_00026.jpg" id="27_a0k33"]
+[ext_resource type="Texture2D" uid="uid://dd8bgp7ut3bas" path="res://Resources/Image/书香蝶影·视频/书香蝶影·视频_00027.jpg" id="28_t1ljk"]
+[ext_resource type="Texture2D" uid="uid://dw63hq4jf52u3" path="res://Resources/Image/书香蝶影·视频/书香蝶影·视频_00028.jpg" id="29_57mxj"]
+[ext_resource type="Texture2D" uid="uid://dte4sw6s8y0gk" path="res://Resources/Image/书香蝶影·视频/书香蝶影·视频_00029.jpg" id="30_0or6r"]
+[ext_resource type="Texture2D" uid="uid://cpb1bg06gvb4q" path="res://Resources/Image/书香蝶影·视频/书香蝶影·视频_00030.jpg" id="31_hgkj8"]
+[ext_resource type="Texture2D" uid="uid://dl0ny4rsl7sc7" path="res://Resources/Image/书香蝶影·视频/书香蝶影·视频_00031.jpg" id="32_tvhae"]
+[ext_resource type="Texture2D" uid="uid://dfbrswghvyf6h" path="res://Resources/Image/书香蝶影·视频/书香蝶影·视频_00032.jpg" id="33_7kduw"]
+[ext_resource type="Texture2D" uid="uid://c1568wge3vqtu" path="res://Resources/Image/书香蝶影·视频/书香蝶影·视频_00033.jpg" id="34_hrqlo"]
+[ext_resource type="Texture2D" uid="uid://1piu021ibkfi" path="res://Resources/Image/书香蝶影·视频/书香蝶影·视频_00034.jpg" id="35_rkkqi"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_60r47"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_hcndk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_ecv66")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_kve41")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_wvmbk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_cecqa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_t2t47")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_uflgr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_36eoi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_vmdhw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_cnyj5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_xlc8m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_lob6k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_ma2o5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_b46cc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_k5m00")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_6wng3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_m6u7f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_ecgou")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_e8yit")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_sl5fr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_gt361")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_j3x36")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_j2p7e")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_8g1es")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_5fm5b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_8obwq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_a0k33")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_t1ljk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("29_57mxj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("30_0or6r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("31_hgkj8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("32_tvhae")
+}, {
+"duration": 1.0,
+"texture": ExtResource("33_7kduw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("34_hrqlo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("35_rkkqi")
+}],
+"loop": true,
+"name": &"default",
+"speed": 15.0
+}]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_60r47")
+frame_progress = 0.238656
