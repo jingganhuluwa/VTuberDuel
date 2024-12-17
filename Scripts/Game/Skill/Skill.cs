@@ -108,40 +108,14 @@ public class Skill
             {
                 Owner.IsSkillFinish = true;
                 Owner.Render.ZIndex = 0;
-                //检测当前行动人数,少于2时,切换为RunState
-                CheckAndSwitchState();
+
             });
         ActionManager.Instance.RunAction(moveToAction);
         
        
     }
 
-    /// <summary>
-    /// 检测当前行动人数,少于2时,切换为RunState
-    /// </summary>
-    private void CheckAndSwitchState()
-    {
-        int actNum = 0;
-        foreach (VTuberLogic vTuberLogic in _battleWorld.AllVTuber)
-        {
-            if (!vTuberLogic.IsAlive)
-            {
-                continue;
-            }
-
-            if (!vTuberLogic.IsSkillFinish)
-            {
-                actNum++;
-            }
-
-        }
-
-        if (actNum<2)
-        {
-
-            _battleWorld.ChangeState(_battleWorld.RunState);
-        }
-    }
+  
     
     
     /// <summary>

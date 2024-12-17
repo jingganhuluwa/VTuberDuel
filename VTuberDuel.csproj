@@ -13,4 +13,10 @@
   <ItemGroup>
     <Folder Include="Resources\Scene\" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="android\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Remove="android\**" />
+  </ItemGroup>
 </Project>
