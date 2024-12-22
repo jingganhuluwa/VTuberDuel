@@ -1,9 +1,8 @@
-[gd_scene load_steps=17 format=3 uid="uid://boi8j2ylacjcl"]
+[gd_scene load_steps=16 format=3 uid="uid://boi8j2ylacjcl"]
 
 [ext_resource type="Script" path="res://Scripts/Game/VTuber/Render/VTuberRender.cs" id="1_3xn2n"]
-[ext_resource type="Texture2D" uid="uid://b0ib7cpyyjtb1" path="res://icon.svg" id="2_dg2e3"]
 [ext_resource type="PackedScene" uid="uid://blsgbw0qouvuy" path="res://Resources/Prefabs/HPBar.tscn" id="2_juvca"]
-[ext_resource type="Texture2D" uid="uid://b7j8hsotgoieo" path="res://Resources/Image/UI/Semi Rounded.png" id="4_fa5sr"]
+[ext_resource type="PackedScene" uid="uid://d4ijfyu0k0xsg" path="res://Resources/Prefabs/Card.tscn" id="3_0yk2i"]
 [ext_resource type="Texture2D" uid="uid://ck3i7ey0lxgiw" path="res://Resources/Image/White Slash Thin/File1.png" id="5_wyuvi"]
 [ext_resource type="Texture2D" uid="uid://ckwy0a7jr2ckv" path="res://Resources/Image/White Slash Thin/File2.png" id="6_bnkii"]
 [ext_resource type="Texture2D" uid="uid://dicwhkiby3ywx" path="res://Resources/Image/White Slash Thin/File3.png" id="7_n88s3"]
@@ -65,7 +64,7 @@ step = 0.075
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("VtuberImage/OnhitSprite:visible")
+tracks/0/path = NodePath("Card/OnhitSprite:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -80,7 +79,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("VtuberImage/OnhitSprite:visible")
+tracks/0/path = NodePath("Card/OnhitSprite:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -96,14 +95,12 @@ _data = {
 "RESET": SubResource("Animation_ilf4u")
 }
 
-[node name="VTuberRender" type="Node2D" node_paths=PackedStringArray("HPBar", "RunBar", "VTuberSprite", "OnhitSprite", "AniPlayer", "VTuberName", "SkillName", "AnimSlash")]
+[node name="VTuberRender" type="Node2D" node_paths=PackedStringArray("HPBar", "RunBar", "AniPlayer", "VTuberName", "SkillName", "AnimSlash")]
 modulate = Color(0.9, 0.9, 0.9, 1)
 scale = Vector2(1.5, 1.5)
 script = ExtResource("1_3xn2n")
 HPBar = NodePath("HPBar")
 RunBar = NodePath("RunBar")
-VTuberSprite = NodePath("VtuberImage")
-OnhitSprite = NodePath("VtuberImage/OnhitSprite")
 AniPlayer = NodePath("AnimationPlayer")
 VTuberName = NodePath("VTuberName")
 SkillName = NodePath("SkillName")
@@ -133,16 +130,7 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_8y61v")
 value = 50.0
 show_percentage = false
 
-[node name="VtuberImage" type="Sprite2D" parent="."]
-clip_children = 1
-texture = ExtResource("2_dg2e3")
-
-[node name="Sprite2D2" type="Sprite2D" parent="VtuberImage"]
-texture = ExtResource("2_dg2e3")
-
-[node name="OnhitSprite" type="Sprite2D" parent="VtuberImage"]
-self_modulate = Color(1, 0, 0, 1)
-texture = ExtResource("4_fa5sr")
+[node name="Card" parent="." instance=ExtResource("3_0yk2i")]
 
 [node name="VTuberName" type="Label" parent="."]
 anchors_preset = 5
@@ -171,6 +159,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Slash" type="AnimatedSprite2D" parent="."]
+visible = false
 modulate = Color(1.1, 1.1, 1.1, 1)
 z_index = 5
 position = Vector2(0, -100)

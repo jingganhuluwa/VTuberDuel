@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=3 uid="uid://coxn82rmmqfeb"]
+
+[ext_resource type="Texture2D" uid="uid://cxnqi25rh4hwv" path="res://Resources/Image/UI/size0.5x.png" id="1_0tm3d"]
+[ext_resource type="Script" path="res://Scripts/Game/Item/ItemRender.cs" id="2_132s5"]
+[ext_resource type="Texture2D" uid="uid://dyu3rngv2o25a" path="res://Resources/Image/书香蝶影·视频/书香蝶影·视频_00000.jpg" id="2_ifqxr"]
+[ext_resource type="Texture2D" uid="uid://dtiom8sljcci8" path="res://Resources/Image/UI/size-stroke0.5x.png" id="3_a2mpg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7yejq"]
+size = Vector2(250, 354.25)
+
+[node name="ItemRender" type="Sprite2D"]
+clip_children = 1
+texture = ExtResource("1_0tm3d")
+script = ExtResource("2_132s5")
+
+[node name="ItemImage" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_ifqxr")
+
+[node name="Border" type="Sprite2D" parent="."]
+texture = ExtResource("3_a2mpg")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_7yejq")
+one_way_collision_margin = 0.0
+
+[connection signal="mouse_entered" from="Area2D" to="." method="OnMouseEnter"]
+[connection signal="mouse_exited" from="Area2D" to="." method="OnMouseExit"]

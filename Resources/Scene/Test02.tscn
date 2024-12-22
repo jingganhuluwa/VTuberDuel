@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://2fny3m8nxnto"]
+
+[ext_resource type="Script" path="res://Scripts/Game/Item/ItemController.cs" id="1_v3feo"]
+[ext_resource type="PackedScene" uid="uid://coxn82rmmqfeb" path="res://Resources/Prefabs/ItemRender.tscn" id="1_ytrh6"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="ItemController" type="Node2D" parent="."]
+script = ExtResource("1_v3feo")
+
+[node name="ItemRender" parent="ItemController" instance=ExtResource("1_ytrh6")]
+position = Vector2(491, 384)
+
+[node name="ItemRender2" parent="ItemController" instance=ExtResource("1_ytrh6")]
+position = Vector2(675, 517)
+
+[node name="ItemRender3" parent="ItemController" instance=ExtResource("1_ytrh6")]
+position = Vector2(798, 397)
