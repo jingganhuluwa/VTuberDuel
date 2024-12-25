@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://dtiom8sljcci8" path="res://Resources/Image/UI/size-stroke0.5x.png" id="3_a2mpg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7yejq"]
-size = Vector2(250, 354.25)
+size = Vector2(250, 350)
 
 [node name="ItemRender" type="Sprite2D"]
 clip_children = 1

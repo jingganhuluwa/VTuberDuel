@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://2fny3m8nxnto"]
+[gd_scene load_steps=4 format=3 uid="uid://2fny3m8nxnto"]
 
 [ext_resource type="Script" path="res://Scripts/Game/Item/ItemController.cs" id="1_v3feo"]
 [ext_resource type="PackedScene" uid="uid://coxn82rmmqfeb" path="res://Resources/Prefabs/ItemRender.tscn" id="1_ytrh6"]
+[ext_resource type="PackedScene" uid="uid://dsyrkqpssnrcd" path="res://Resources/Prefabs/ItemSlot.tscn" id="3_blalv"]
 
 [node name="Node2D" type="Node2D"]
 
@@ -9,10 +10,22 @@
 script = ExtResource("1_v3feo")
 
 [node name="ItemRender" parent="ItemController" instance=ExtResource("1_ytrh6")]
-position = Vector2(491, 384)
+position = Vector2(315, 843)
 
 [node name="ItemRender2" parent="ItemController" instance=ExtResource("1_ytrh6")]
-position = Vector2(675, 517)
+position = Vector2(737, 833)
 
 [node name="ItemRender3" parent="ItemController" instance=ExtResource("1_ytrh6")]
-position = Vector2(798, 397)
+position = Vector2(1215, 863)
+
+[node name="ItemSlot" parent="." instance=ExtResource("3_blalv")]
+position = Vector2(565, 368)
+
+[node name="ItemSlot2" parent="." instance=ExtResource("3_blalv")]
+position = Vector2(265, 400)
+
+[node name="ItemSlot3" parent="." instance=ExtResource("3_blalv")]
+position = Vector2(919, 377)
+
+[node name="ItemSlot4" parent="." instance=ExtResource("3_blalv")]
+position = Vector2(1204, 368)

@@ -15,11 +15,13 @@ public partial class ItemController : Node2D
 
     private Vector2 _screenSize;
     private const int CollisionMaskItem = 1;
+    private const int CollisionMaskItemSlot = 2;
 
     /// <summary>
     /// 当前拖动物体
     /// </summary>
     private Node2D _dragItem;
+
 
     //private bool _hoveringItem = false;
 
@@ -28,6 +30,7 @@ public partial class ItemController : Node2D
     /// </summary>
     private Node2D _hoveredItem;
 
+    private Node2D _hoverItemSlot;
 
     public override void _Ready()
     {
@@ -82,6 +85,12 @@ public partial class ItemController : Node2D
         if (_dragItem != null)
         {
             _dragItem.Scale = Vector2.One * 1.05f;
+            
+            //如果检测到卡槽,放置到卡槽
+            if (RaycastCheckItemSlot())
+            {
+                _dragItem.Position = _hoverItemSlot.Position;
+            }
         }
     }
 
@@ -105,14 +114,33 @@ public partial class ItemController : Node2D
         return null;
     }
 
-    private readonly List<Node2D> _raycastList = new List<Node2D>();
+    /// <summary> 射线检测获取点击的物品槽位 </summary>
+    private bool RaycastCheckItemSlot()
+    {
+        PhysicsDirectSpaceState2D spaceState = GetWorld2D().DirectSpaceState;
+        var parameters = new PhysicsPointQueryParameters2D();
+        parameters.Position = GetGlobalMousePosition();
+        parameters.CollideWithAreas = true;
+        parameters.CollisionMask = CollisionMaskItemSlot;
+        var result = spaceState.IntersectPoint(parameters);
+        if (result.Count > 0)
+        {
+            //获取最高zIndex的物体
+            //Area2D collider = (Area2D) result[0]["collider"];
+            _hoverItemSlot = MaxZIndex(result);
+            return true;
+        }
+
+        return false;
+    }
+
 
     /// <summary>
     /// 获取最高zIndex的物体
     /// </summary>
     private Node2D MaxZIndex(Array<Dictionary> result)
     {
-        _raycastList.Clear();
+        List<Node2D> _raycastList = new List<Node2D>();
         foreach (Dictionary dict in result)
         {
             var area2D = (Area2D) dict["collider"];
