@@ -5,22 +5,23 @@ using Godot.Collections;
 
 public partial class ItemController : Node2D
 {
-    public static ItemController Instance { get; private set; }
-
-    public override void _EnterTree()
-    {
-        base._EnterTree();
-        Instance = this;
-    }
-
-    private Vector2 _screenSize;
+    //屏幕尺寸
+    private Vector2 _screenSize=>GetViewportRect().Size;
+    //屏幕中心
+    private Vector2 _screenCenter=>_screenSize/2;
+    private float _itemWidth=300;
+    
     private const int CollisionMaskItem = 1;
     private const int CollisionMaskItemSlot = 2;
+
+    public Node2D PlayerHand { get; private set; }
+    private readonly List<ItemRender> _handItemList = new List<ItemRender>();
+    public Node2D SlotS { get; private set; }
 
     /// <summary>
     /// 当前拖动物体
     /// </summary>
-    private Node2D _dragItem;
+    private ItemRender _dragItem;
 
 
     //private bool _hoveringItem = false;
@@ -34,7 +35,22 @@ public partial class ItemController : Node2D
 
     public override void _Ready()
     {
-        _screenSize = GetViewportRect().Size;
+        SlotS = FindChild("Slots") as Node2D;
+        PlayerHand = FindChild("PlayerHand") as Node2D;
+        if (SlotS == null)
+        {
+            SlotS = new Node2D();
+            SlotS.Name = "Slots";
+            GD.Print("hh");
+        }
+
+        if (PlayerHand == null)
+        {
+            PlayerHand = new Node2D();
+            PlayerHand.Name = "PlayerHand";
+            GD.Print("hh");
+        }
+        _handItemList.Clear();
     }
 
     public override void _Process(double delta)
@@ -48,8 +64,21 @@ public partial class ItemController : Node2D
         }
     }
 
+    
+
     public override void _Input(InputEvent @event)
     {
+        if (@event is InputEventKey eventKey)
+        {
+            if (eventKey.Keycode==Key.A)
+            {
+                if (eventKey.Pressed)
+                {
+                    AddHandItem("res://Resources/Prefabs/ItemRender.tscn");
+                }
+            }
+        }
+        
         if (@event is not InputEventMouseButton eventMouseButton)
         {
             return;
@@ -63,7 +92,7 @@ public partial class ItemController : Node2D
                 Node2D raycastCheckItem = RaycastCheckItem();
                 if (raycastCheckItem != null)
                 {
-                    _dragItem = raycastCheckItem;
+                    _dragItem = raycastCheckItem as ItemRender;
                     StartDragItem();
                 }
             }
@@ -75,6 +104,7 @@ public partial class ItemController : Node2D
         }
     }
 
+    #region 拖动物体与悬停
     private void StartDragItem()
     {
         _dragItem.Scale = Vector2.One;
@@ -85,12 +115,19 @@ public partial class ItemController : Node2D
         if (_dragItem != null)
         {
             _dragItem.Scale = Vector2.One * 1.05f;
-            
+
             //如果检测到卡槽,放置到卡槽
             if (RaycastCheckItemSlot())
             {
-                _dragItem.Position = _hoverItemSlot.Position;
+                _dragItem.TargetPosition = _hoverItemSlot.Position;
+                _handItemList.Remove(_dragItem);
             }
+            else
+            {
+                AddHandItem(_dragItem);
+            }
+            AnimateItemToPos(_dragItem);
+            UpdateHandItemPos();
         }
     }
 
@@ -195,4 +232,61 @@ public partial class ItemController : Node2D
         item.Scale = Vector2.One;
         item.ZIndex = 1;
     }
+
+    #endregion
+
+    #region 增删改查
+
+    
+    public void AddHandItem(ItemRender item)
+    {
+        _handItemList.Add(item);
+        UpdateHandItemPos();
+    }
+    public void AddHandItem(PackedScene packedScene)
+    {
+        ItemRender newItem = packedScene.Instantiate<ItemRender>();
+        PlayerHand.AddChild(newItem);
+        newItem.Name = "item";
+        AddHandItem(newItem);
+    }
+    public void AddHandItem(string path)
+    {
+        var packedScene = ResourceLoader.Load<PackedScene>(path);
+        if (packedScene != null)
+        {
+            AddHandItem(packedScene);
+        }
+    }
+
+    private void UpdateHandItemPos()
+    {
+        for (int index = 0; index < _handItemList.Count; index++)
+        {
+            ItemRender itemRender = _handItemList[index];
+            itemRender.TargetPosition =new Vector2(CalculateXPos(index),800) ;
+            AnimateItemToPos(itemRender);
+        }
+    }
+
+    private float CalculateXPos(int index)
+    {
+        float totalWidth = _handItemList.Count*_itemWidth;
+        return _screenCenter.X+index * _itemWidth - totalWidth/2;
+    }
+
+    private void AnimateItemToPos(ItemRender itemRender)
+    {
+        Tween tween = CreateTween();
+        tween.TweenProperty(itemRender, "position", itemRender.TargetPosition,0.1);
+        tween.Play();
+    }
+
+    public void AddToSlot()
+    {
+        
+    }
+
+    #endregion
+    
 }

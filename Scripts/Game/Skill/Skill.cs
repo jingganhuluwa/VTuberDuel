@@ -212,48 +212,22 @@ public class Skill
 
         List<VTuberLogic> teamList;
 
-        if (Config.TeamType == TeamType.FriendTeam)
-        {
-            teamList = Owner.OwnerBattleWorld.AllFriendTeamList(Owner.Team);
-        }
-        else
-        {
-            teamList = Owner.OwnerBattleWorld.AllEnemyTeamList(Owner.Team);
-        }
+
 
         switch (Config.SkillAtkType)
         {
             case SkillAtkType.One:
             default:
                 //todo 设定技能目标
-                foreach (VTuberLogic vTuber in teamList)
-                {
-                    if (vTuber.IsAlive)
-                    {
-                        Targets.Add(vTuber);
-                        break;
-                    }
-                }
+ 
 
                 break;
             case SkillAtkType.All:
-                foreach (VTuberLogic vTuber in teamList)
-                {
-                    if (vTuber.IsAlive)
-                    {
-                        Targets.Add(vTuber);
-                    }
-                }
+
 
                 break;
             case SkillAtkType.Global:
-                foreach (VTuberLogic vTuber in Owner.OwnerBattleWorld.AllVTuber)
-                {
-                    if (vTuber.IsAlive)
-                    {
-                        Targets.Add(vTuber);
-                    }
-                }
+ 
 
                 break;
             case SkillAtkType.FrontRow:

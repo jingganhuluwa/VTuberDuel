@@ -3,9 +3,10 @@
 [ext_resource type="Texture2D" uid="uid://c8h5uqatmdpq7" path="res://Resources/Image/UI/Slot.png" id="1_t7u3v"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_acnkx"]
-size = Vector2(250, 350)
+size = Vector2(320, 420)
 
 [node name="ItemSlot" type="Node2D"]
+position = Vector2(165, 244)
 scale = Vector2(1.03, 1.03)
 
 [node name="SlotImage" type="Sprite2D" parent="."]

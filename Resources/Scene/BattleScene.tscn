@@ -1,28 +1,138 @@
-[gd_scene load_steps=2 format=3 uid="uid://wyv1f5dr7gid"]
+[gd_scene load_steps=4 format=3 uid="uid://wyv1f5dr7gid"]
 
 [ext_resource type="Script" path="res://Scripts/Game/Battle/BattleScene.cs" id="1_wxys0"]
+[ext_resource type="Texture2D" uid="uid://c8h5uqatmdpq7" path="res://Resources/Image/UI/Slot.png" id="2_vrl1b"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ke7fu"]
+size = Vector2(250, 350)
 
 [node name="BattleScene" type="Node" node_paths=PackedStringArray("PlayerSeatArr", "EnemySeatArr")]
 script = ExtResource("1_wxys0")
 PlayerSeatArr = [NodePath("PlayerSeat/1"), NodePath("PlayerSeat/2"), NodePath("PlayerSeat/3"), NodePath("PlayerSeat/4"), NodePath("PlayerSeat/5")]
-EnemySeatArr = [NodePath("EnemySeat/1"), NodePath("EnemySeat/2"), NodePath("EnemySeat/3"), NodePath("EnemySeat/4"), NodePath("EnemySeat/5")]
+EnemySeatArr = [NodePath("EnemySeat/1"), null, null, null, null]
 
 [node name="EnemySeat" type="Node2D" parent="."]
-position = Vector2(540, 900)
+position = Vector2(516, 154)
+scale = Vector2(0.6, 0.6)
 
 [node name="1" type="Node2D" parent="EnemySeat"]
+position = Vector2(-401, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="EnemySeat/1"]
+texture = ExtResource("2_vrl1b")
 
 [node name="2" type="Node2D" parent="EnemySeat"]
-position = Vector2(-300, -150)
+position = Vector2(-142, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="EnemySeat/2"]
+texture = ExtResource("2_vrl1b")
 
 [node name="3" type="Node2D" parent="EnemySeat"]
-position = Vector2(300, -150)
+position = Vector2(134, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="EnemySeat/3"]
+texture = ExtResource("2_vrl1b")
 
 [node name="4" type="Node2D" parent="EnemySeat"]
-position = Vector2(-200, -400)
+position = Vector2(417, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="EnemySeat/4"]
+texture = ExtResource("2_vrl1b")
 
 [node name="5" type="Node2D" parent="EnemySeat"]
-position = Vector2(200, -400)
+position = Vector2(728, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="EnemySeat/5"]
+texture = ExtResource("2_vrl1b")
+
+[node name="6" type="Node2D" parent="EnemySeat"]
+position = Vector2(1059, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="EnemySeat/6"]
+texture = ExtResource("2_vrl1b")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="EnemySeat"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -368.333
+offset_top = 258.333
+offset_right = 1561.67
+offset_bottom = 608.333
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 30
+alignment = 1
+
+[node name="1" type="TextureRect" parent="EnemySeat/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("2_vrl1b")
+
+[node name="Area2D" type="Area2D" parent="EnemySeat/HBoxContainer/1"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemySeat/HBoxContainer/1/Area2D"]
+position = Vector2(126.667, 173.333)
+shape = SubResource("RectangleShape2D_ke7fu")
+
+[node name="2" type="TextureRect" parent="EnemySeat/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("2_vrl1b")
+
+[node name="Area2D" type="Area2D" parent="EnemySeat/HBoxContainer/2"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemySeat/HBoxContainer/2/Area2D"]
+position = Vector2(126.667, 173.333)
+shape = SubResource("RectangleShape2D_ke7fu")
+
+[node name="3" type="TextureRect" parent="EnemySeat/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("2_vrl1b")
+
+[node name="Area2D" type="Area2D" parent="EnemySeat/HBoxContainer/3"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemySeat/HBoxContainer/3/Area2D"]
+position = Vector2(126.667, 173.333)
+shape = SubResource("RectangleShape2D_ke7fu")
+
+[node name="4" type="TextureRect" parent="EnemySeat/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("2_vrl1b")
+
+[node name="Area2D" type="Area2D" parent="EnemySeat/HBoxContainer/4"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemySeat/HBoxContainer/4/Area2D"]
+position = Vector2(126.667, 173.333)
+shape = SubResource("RectangleShape2D_ke7fu")
+
+[node name="5" type="TextureRect" parent="EnemySeat/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("2_vrl1b")
+
+[node name="Area2D" type="Area2D" parent="EnemySeat/HBoxContainer/5"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemySeat/HBoxContainer/5/Area2D"]
+position = Vector2(126.667, 173.333)
+shape = SubResource("RectangleShape2D_ke7fu")
+
+[node name="6" type="TextureRect" parent="EnemySeat/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("2_vrl1b")
+
+[node name="Area2D" type="Area2D" parent="EnemySeat/HBoxContainer/6"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemySeat/HBoxContainer/6/Area2D"]
+position = Vector2(126.667, 173.333)
+shape = SubResource("RectangleShape2D_ke7fu")
+
+[node name="7" type="TextureRect" parent="EnemySeat/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("2_vrl1b")
+
+[node name="Area2D" type="Area2D" parent="EnemySeat/HBoxContainer/7"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemySeat/HBoxContainer/7/Area2D"]
+position = Vector2(126.667, 173.333)
+shape = SubResource("RectangleShape2D_ke7fu")
 
 [node name="PlayerSeat" type="Node2D" parent="."]
 position = Vector2(540, 1500)

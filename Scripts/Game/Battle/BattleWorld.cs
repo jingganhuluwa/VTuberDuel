@@ -5,7 +5,6 @@
 
 
 using System.Collections.Generic;
-using System.Linq;
 using Godot;
 using TinyFramework;
 
@@ -15,15 +14,7 @@ public class BattleWorld
 
     public BattleScene Scene { get; private set; }
 
-
-    private readonly List<VTuberLogic> _allVTuberList = new List<VTuberLogic>();
-    private readonly List<VTuberLogic> _playerVTuberList = new List<VTuberLogic>();
-    private readonly List<VTuberLogic> _enemyVTuberList = new List<VTuberLogic>();
-
-    private int _playerAliveCount;
-    private int _enemyAliveCount;
-
-    public TeamEnum WinTeam = TeamEnum.Player;
+    
 
     private BaseState _currentState;
     public BaseState StartState { get; private set; }
@@ -44,7 +35,6 @@ public class BattleWorld
         Name = battleWorldName;
 
         RunState = new RunState() {World = this};
-        ActState = new ActState() {World = this};
         PauseState = new PauseState() {World = this};
         EndState = new EndState() {World = this};
         StartState = new StartState() {World = this};
@@ -59,15 +49,13 @@ public class BattleWorld
         for (int i = 0; i < playerVTuberList.Count; i++)
         {
             VTuberLogic vTuber = VTuberFactory.CreateBattleVTuber(playerVTuberList[i], i + 1, Scene.PlayerSeatArr[i],TeamEnum.Player,this);
-            _playerVTuberList.Add(vTuber);
-            _allVTuberList.Add(vTuber);
+
         }
 
         for (int i = 0; i < enemyVTuberList.Count; i++)
         {
             VTuberLogic vTuber = VTuberFactory.CreateBattleVTuber(enemyVTuberList[i], i + 1, Scene.EnemySeatArr[i],TeamEnum.Enemy,this);
-            _enemyVTuberList.Add(vTuber);
-            _allVTuberList.Add(vTuber);
+
         }
 
         //改变当前状态为开局转态
@@ -95,47 +83,9 @@ public class BattleWorld
     {
     }
 
-    //toList,临时List,防手贱,在其他地方进行add,remove操作
-    /// <returns>所有VTuber逻辑</returns>
-    public List<VTuberLogic> AllVTuber => _allVTuberList.ToList();
-
-    /// <returns>所有敌方队伍VTuber逻辑</returns>
-    public List<VTuberLogic> AllEnemyTeamList(TeamEnum team) =>
-        team == TeamEnum.Player ? _enemyVTuberList.ToList() : _playerVTuberList.ToList();
-
-    /// <returns>所有友方队伍VTuber逻辑</returns>
-    public List<VTuberLogic> AllFriendTeamList(TeamEnum team) =>
-        team != TeamEnum.Player ? _enemyVTuberList.ToList() : _playerVTuberList.ToList();
-
-    public void AliveCount()
-    {
-        _playerAliveCount = 0;
-        _enemyAliveCount = 0;
-        foreach (VTuberLogic playerVTuber in _playerVTuberList)
-        {
-            if (playerVTuber.IsAlive)
-            {
-                _playerAliveCount++;
-            }
-        }
-
-        foreach (VTuberLogic enemyVTuber in _enemyVTuberList)
-        {
-            if (enemyVTuber.IsAlive)
-            {
-                _enemyAliveCount++;
-            }
-        }
 
 
-        if (_playerAliveCount == 0 || _enemyAliveCount == 0)
-        {
-            if (_playerAliveCount == 0)
-            {
-                WinTeam = TeamEnum.Enemy;
-            }
 
-            ChangeState(EndState);
-        }
-    }
+
+    
 }

@@ -21,8 +21,7 @@ public partial class GameManager:SingletonNode<GameManager>
         LogicFrameManager.Instance.Init();
         
         ActionManager.Instance.Init();
-
-
+        
         PackedScene UI = ResourceLoader.Load<PackedScene>(PathDefine.UIPath+"UIManager.tscn");
         AddChild(UI.Instantiate<UIManager>());
         UIManager.Instance.Init();
